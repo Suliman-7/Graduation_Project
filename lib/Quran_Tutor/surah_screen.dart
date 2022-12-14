@@ -18,6 +18,8 @@ class surah_screen extends StatefulWidget {
   static const String id = 'surahDetail_screen' ;
   static String BV = '';
   static List Fav = [] ;
+  static int QN = 0 ;
+  
   
 
   @override
@@ -66,7 +68,8 @@ class _surah_screenState extends State<surah_screen> {
                 return TextButton(onPressed: ()
                 {
                   var choosedverse = Arr[index];
-                  openDialog(choosedverse);
+                  var qn = verse.QuranNumber ;
+                  openDialog(choosedverse,qn);
                                 // Navigator.pushNamed(context, surah_screen.id);
                                }, 
 
@@ -111,7 +114,7 @@ class _surah_screenState extends State<surah_screen> {
     );
   }
 
-Future<void> openDialog(choosedverse) async {
+Future<void> openDialog(choosedverse, qn) async {
   switch( await showDialog(
     context: context, 
     builder: (BuildContext context) {
@@ -119,7 +122,10 @@ Future<void> openDialog(choosedverse) async {
         title: Text("select option"),
         children: [
           SimpleDialogOption(child: Text("Start Reading"),
-          onPressed: () {Navigator.pushReplacement(context,MaterialPageRoute(builder: (context){return SpeechText();}));},),
+          onPressed: () {
+          surah_screen.QN = qn ;
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context){return SpeechText();
+          }));},),
 
 
           

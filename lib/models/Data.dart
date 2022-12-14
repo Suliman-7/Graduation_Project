@@ -7,7 +7,33 @@ import '../Quran_Tutor/Verse.dart';
 
 
 
+class Versec {
+  String? verseClean ;
+  
+  Versec({this.verseClean});
 
+  factory Versec.fromJSON(Map<String,dynamic> json){
+    return Versec(
+      verseClean: json['text'],
+    );
+  }
+}
+
+class verseCList {
+
+  final List<Versec> verseList ;
+
+  verseCList({required this.verseList});
+
+  factory verseCList.fromJSON(Map<String,dynamic>MAP){
+    Iterable l = MAP['data'][0]['ayahs'];
+    List<Versec> list = l.map((e) => Versec.fromJSON(e)).toList();
+    print(list);
+    
+    return verseCList(verseList: list);
+  }
+  
+}
 
 
 
@@ -15,16 +41,16 @@ class Surah {
 
   int? verseNumber ; 
   String? verse ;
-  int? verseSurNum ; 
+  int? QuranNumber ; 
   
 
-  Surah({this.verse,this.verseNumber,this.verseSurNum});
+  Surah({this.verse,this.verseNumber,this.QuranNumber});
 
   factory Surah.fromJSON(Map<String,dynamic> json){
     return Surah(
-      verseNumber: json['number'],
+      verseNumber: json['numberInSurah'],
       verse: json['text'],
-      verseSurNum: json['numberInSurah']
+      QuranNumber: json['numberInSurah']
                  );
 }}
 

@@ -37,12 +37,12 @@ class ApiService {
 
 
 
-    // Future <surahList> getV(int index) async {
-    //   final Url = "https://quranenc.com/api/v1/translation/sura/english_rwwad/${index}" ;
-    //   var res = await http.get(Uri.parse(Url));
+    Future <verseCList> getV(int index) async {
+      final Url = "https://api.alquran.cloud/v1/surah/${index}/editions/quran-simple-clean" ;
+      var res = await http.get(Uri.parse(Url));
 
-    //   return surahList.fromJSON(json.decode(res.body));
-    // }
+      return verseCList.fromJSON(json.decode(res.body));
+    }
 
     
 
