@@ -2,10 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
+import 'package:quran_tutor/Options/Favorites.dart';
 import 'package:quran_tutor/models/Data.dart';
 import 'package:quran_tutor/services/api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import '../Options/Favorites.dart';
 import '../Options/bookmark.dart';
 
 class HomePage1 extends StatefulWidget {
@@ -174,7 +175,9 @@ class _HomePage1State extends State<HomePage1> {
                   ]),
                   Spacer(),
                   Column(children: [
-                    Container(child: IconButton(icon: Icon(Icons.star), onPressed: () {  },)),
+                    Container(child: IconButton(icon: Icon(Icons.star), onPressed: () {
+                    Navigator.push(context,MaterialPageRoute(builder: (context){return Favorites();}));
+                      },)),
                     Container(child: Text("Favorites" , textAlign: TextAlign.center, 
                     style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),)
                   ]),

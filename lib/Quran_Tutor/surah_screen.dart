@@ -1,4 +1,6 @@
 
+import 'dart:ffi';
+
 import 'package:flutter/material.dart' ;
 import 'package:quran_tutor/Options/read.dart';
 import 'package:quran_tutor/Quran_Tutor/home.dart';
@@ -15,6 +17,7 @@ class surah_screen extends StatefulWidget {
 
   static const String id = 'surahDetail_screen' ;
   static String BV = '';
+  static List Fav = [] ;
   
 
   @override
@@ -54,7 +57,7 @@ class _surah_screenState extends State<surah_screen> {
                 String? editeted = "";
 
                 if (number == 0) {
-                    Arr.add(' بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ  ${verse.verse}   { ${(verse.verseNumber)} } ' );
+                    Arr.add(' ${verse.verse}   { ${(verse.verseNumber)} } ' );
                     // Arr.add("");                    
                   } else {
                     Arr.add("${verse.verse}   { ${(verse.verseNumber)} }");
@@ -122,8 +125,8 @@ Future<void> openDialog(choosedverse) async {
           
           SimpleDialogOption(child: Text("Favorite verse"),
           onPressed: () {
-            var Favoriteverse = choosedverse ;
-            print(Favoriteverse);
+            surah_screen.Fav.add(choosedverse);
+            
           },),
           SimpleDialogOption(child: Text("Bookmark verse"),
           onPressed: () {

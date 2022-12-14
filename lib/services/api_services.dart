@@ -13,7 +13,6 @@ import '../models/Data.dart';
 class ApiService {
 
     List<Reciter> ReciterList = [];
-
     Future<List<Reciter>> getReciterList() async{
 
       final url = "https://quranicaudio.com/api/qaris" ;
@@ -30,11 +29,22 @@ class ApiService {
     
     
     Future <surahList> getverses(int index) async {
-      final Url = "https://quranenc.com/api/v1/translation/sura/english_rwwad/${index}" ;
+      final Url = "https://api.alquran.cloud/v1/surah/${index}/editions/quran-simple" ;
       var res = await http.get(Uri.parse(Url));
 
       return surahList.fromJSON(json.decode(res.body));
     }
+
+
+
+    // Future <surahList> getV(int index) async {
+    //   final Url = "https://quranenc.com/api/v1/translation/sura/english_rwwad/${index}" ;
+    //   var res = await http.get(Uri.parse(Url));
+
+    //   return surahList.fromJSON(json.decode(res.body));
+    // }
+
+    
 
     final endPointUrl = "http://api.alquran.cloud/v1/surah" ;
     List<SurahList> list = [] ;

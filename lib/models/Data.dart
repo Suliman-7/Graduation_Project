@@ -13,18 +13,18 @@ import '../Quran_Tutor/Verse.dart';
 
 class Surah {
 
-  String? verseNumber ; 
+  int? verseNumber ; 
   String? verse ;
-  String? verseSurNum ; 
+  int? verseSurNum ; 
   
 
   Surah({this.verse,this.verseNumber,this.verseSurNum});
 
   factory Surah.fromJSON(Map<String,dynamic> json){
     return Surah(
-      verseNumber: json['aya'],
-      verse: json['arabic_text'],
-      verseSurNum: json['sura']
+      verseNumber: json['number'],
+      verse: json['text'],
+      verseSurNum: json['numberInSurah']
                  );
 }}
 
@@ -35,7 +35,7 @@ class surahList {
   surahList({required this.surahlist});
 
   factory surahList.fromJSON(Map<String,dynamic>map){
-    Iterable l = map['result'];
+    Iterable l = map['data'][0]['ayahs'];
     List<Surah> list = l.map((e) => Surah.fromJSON(e)).toList();
     print(list);
     
