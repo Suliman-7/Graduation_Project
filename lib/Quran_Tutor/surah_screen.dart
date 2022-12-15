@@ -2,11 +2,11 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart' ;
-import 'package:quran_tutor/Options/read.dart';
 import 'package:quran_tutor/Quran_Tutor/home.dart';
 import 'package:quran_tutor/services/api_services.dart';
 
 import '../Const/Const.dart';
+import '../Options/Recite.dart';
 import '../models/Data.dart';
 import 'Verse.dart'; 
 

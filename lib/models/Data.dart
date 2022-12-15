@@ -28,7 +28,6 @@ class verseCList {
   factory verseCList.fromJSON(Map<String,dynamic>MAP){
     Iterable l = MAP['data'][0]['ayahs'];
     List<Versec> list = l.map((e) => Versec.fromJSON(e)).toList();
-    print(list);
     
     return verseCList(verseList: list);
   }
@@ -63,27 +62,12 @@ class surahList {
   factory surahList.fromJSON(Map<String,dynamic>map){
     Iterable l = map['data'][0]['ayahs'];
     List<Surah> list = l.map((e) => Surah.fromJSON(e)).toList();
-    print(list);
     
     return surahList(surahlist: list);
   }
   
 }
 
-
-// class verseList {
-
-//   final List<Verse> verselist ;
-
-//   verseList({required this.verselist});
-
-//   factory verseList.fromJSON(Map<String,dynamic>map){
-//     Iterable l = map['result'];
-//     List<verseList> vlist = l.map((e) => verseList.fromJSON(e)).toList();
-//     print(vlist.length);
-//     return verseList(verselist: vlist);
-//   }
-// }
 
 
 class SurahList {
