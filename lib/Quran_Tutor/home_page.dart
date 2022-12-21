@@ -36,7 +36,6 @@ class _HomePage1State extends State<HomePage1> {
   @override
   Widget build(BuildContext context) {
     var _size = MediaQuery.of(context).size;
-    // HijriCalendar.setLocal('ar');
     var _hijri1 = HijriCalendar.now();
     var day = DateTime.now();
     var format = DateFormat('EEE , d MMM yyyy');
@@ -61,8 +60,8 @@ class _HomePage1State extends State<HomePage1> {
               width: double.infinity,
               
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                // mainAxisAlignment: MainAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container( alignment: Alignment.topLeft,
                     child: Text(
@@ -107,8 +106,7 @@ class _HomePage1State extends State<HomePage1> {
             ),
             Expanded(child: SingleChildScrollView(
               padding: EdgeInsets.only(top: 10,bottom: 20),
-              child: Column(
-                children: [
+              child:
                   FutureBuilder <verseDay> (
               future: _apiService.getVerseDay(),
               builder: ((context, snapshot) {
@@ -143,24 +141,23 @@ class _HomePage1State extends State<HomePage1> {
                         Divider(color : Colors.black ,  thickness: 1 ,),
                         Text(snapshot.data!.arText!, style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
                         Text(snapshot.data!.enTran!, style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                        RichText(text: TextSpan(
-                          children: <InlineSpan> [
-                            WidgetSpan(
-                              child : Padding (padding : EdgeInsets.all(8),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding (padding : EdgeInsets.all(8),
                               child: Text(snapshot.data!.surNumber.toString(),
-                              style: TextStyle(fontSize: 16),))),
+                              style: TextStyle(fontSize: 16),)),
 
-                            WidgetSpan(
-                              child : Padding (padding : EdgeInsets.all(8),
-                              child: Text(snapshot.data!.surEnName!,
-                              style: TextStyle(fontSize: 16),)))
+                            Padding (padding : EdgeInsets.all(8),
+                                child: Text(snapshot.data!.surEnName!,
+                                style: TextStyle(fontSize: 16),))
                           ]
-                        ))
+                        )
                       ],),
                     ) 
                   );
-              }}))],
-              ),
+              }})),
             )),
 
             Center(
@@ -178,7 +175,15 @@ class _HomePage1State extends State<HomePage1> {
                     Container(child: IconButton(icon: Icon(Icons.star), onPressed: () {
                     Navigator.push(context,MaterialPageRoute(builder: (context){return Favorites();}));
                       },)),
-                    Container(child: Text("Favorites" , textAlign: TextAlign.center, 
+                    Container(child: Text("Favorite Surah" , textAlign: TextAlign.center, 
+                    style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),)
+                  ]),
+                  Spacer(),
+                  Column(children: [
+                    Container(child: IconButton(icon: Icon(Icons.star), onPressed: () {
+                    Navigator.push(context,MaterialPageRoute(builder: (context){return Favorites();}));
+                      },)),
+                    Container(child: Text("Favorites Verse" , textAlign: TextAlign.center, 
                     style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),)
                   ]),
                 ],

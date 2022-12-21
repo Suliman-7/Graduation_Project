@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:quran_tutor/Const/Const.dart';
 import 'package:quran_tutor/Quran_Tutor/audio_screen.dart';
 import 'package:quran_tutor/Quran_Tutor/home_page.dart';
-import 'package:quran_tutor/Quran_Tutor/prayer_screen.dart';
 import 'package:quran_tutor/Quran_Tutor/quran_screen.dart';
 import 'package:quran_tutor/Quran_Tutor/setting_screen.dart';
+
+import 'Search_screen.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -17,8 +18,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  int selectIndex = 0 ;
-  List<Widget> _listWidget = [Setting(),QuranScreen(),HomePage1(),AudioScreen(),PrayerScreen()] ;
+  int selectIndex = 2 ;
+  List<Widget> _listWidget = [Setting(),QuranScreen(),HomePage1(),AudioScreen(),SearchScreen()] ;
 
   @override
   Widget build(BuildContext context) {
