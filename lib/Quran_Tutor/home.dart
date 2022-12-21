@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:quran_tutor/Quran_Tutor/home_page.dart';
-import 'package:quran_tutor/Quran_Tutor/home_screen.dart';
+import 'package:quran_tutor/Quran_Tutor/Onboarding_screen.dart';
 
-import 'o_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart' ;
 
@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     getdata();
     Timer(Duration(seconds: 3), ()=>Navigator.pushReplacement(context, 
-    MaterialPageRoute(builder: (context){ return alreadyUsed ? HomeScreen() : OBS();
+    MaterialPageRoute(builder: (context){ return HomeScreen(); 
     })));
   }
 
