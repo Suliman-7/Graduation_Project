@@ -96,6 +96,7 @@ class _SpeechTextState extends State<SpeechText> {
             VC = VC.replaceAll("ة","ه");
             print(VC);
             if (recognizedText==VC){
+
               print("Correct");
             }
             else {

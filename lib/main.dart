@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:quran_tutor/Quran_Tutor/home_page.dart';
 import 'package:quran_tutor/Quran_Tutor/surah_screen.dart';
 import 'Const/Const.dart';
-import 'Quran_Tutor/home.dart';
+import 'Quran_Tutor/Onboarding_screen.dart';
 
 void main() {
-  
+
   HttpOverrides.global = MyHttpOverrides();
   runApp(const MyApp());
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         fontFamily: 'Poppins'
       ),
-      home: HomePage(),
+      home: HomeScreen(),
 
       routes: {
         surah_screen.id:(context)=>surah_screen()

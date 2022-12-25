@@ -38,7 +38,7 @@ class _HomePage1State extends State<HomePage1> {
     var _size = MediaQuery.of(context).size;
     var _hijri1 = HijriCalendar.now();
     var day = DateTime.now();
-    var format = DateFormat('EEE , d MMM yyyy');
+    var format = DateFormat('EEE : d MMM yyyy');
     var formatted = format.format(day);
 
     // _apiService.getVerseDay().then((value)=>data = value) ;
