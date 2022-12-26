@@ -7,7 +7,7 @@ import 'package:quran_tutor/services/api_services.dart';
 import '../Const/Const.dart';
 import '../Options/Recite.dart';
 import '../models/Data.dart';
-import 'Verse.dart'; 
+
 
 
 
@@ -46,24 +46,46 @@ class _surah_screenState extends State<surah_screen> {
             return Center(child: CircularProgressIndicator(),);
           }
           else if (snapshot.hasData){
+
+            
             return ListView.builder(
-              itemCount: snapshot.data!.surahlist.length,
+              itemCount: (snapshot.data!.surahlist.length)+1 ,
               itemBuilder: (context,index){
 
-                var length = (snapshot.data!.surahlist.length-1) ;
+                var length = (snapshot.data!.surahlist.length-1);
                 var number =  index ;
-                var verse = snapshot.data!.surahlist[index];
+                var verse = (snapshot.data!.surahlist[index]);
+
+                if ((length)+1 == index){
+                  verse = (snapshot.data!.surahlist[index-1]); ;
+                }
+                
+
+
+                
 
                 final Ver  = verse.verse;
                 String? editeted = "";
-
+              
                 if (number == 0) {
-                    Arr.add(' ${verse.verse}   { ${(verse.verseNumber)} } ' );
-                    // Arr.add("");                    
+                    Arr.add("");
+                    Arr.add(' ${verse.verse}   { ${(verse.verseNumber)} } ' );                   
                   } else {
                     Arr.add("${verse.verse}   { ${(verse.verseNumber)} }");
                   }
+                // print(Arr[1]);
 
+                if (Const.surahIndex != 1) {
+                Arr[1] = Arr[1].toString().replaceAll('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ' , '');
+                }
+
+                if (index==0 && Const.surahIndex != 1){
+                  return Text(
+                    'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20,color: Colors.black54),);
+                }
+                else {
                 return TextButton(onPressed: ()
                 {
                   var choosedverse = Arr[index];
@@ -101,7 +123,7 @@ class _surah_screenState extends State<surah_screen> {
                 
 
 
-              );
+          });
               
           }
           

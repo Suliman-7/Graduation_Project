@@ -1,10 +1,10 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:quran_tutor/Const/Const.dart';
-import 'package:quran_tutor/Quran_Tutor/audio_screen.dart';
-import 'package:quran_tutor/Quran_Tutor/home_page.dart';
-import 'package:quran_tutor/Quran_Tutor/quran_screen.dart';
-import 'package:quran_tutor/Quran_Tutor/setting_screen.dart';
+import 'package:quran_tutor/Audio/audio_screen.dart';
+import 'package:quran_tutor/Quran_Tutor/Home_Screen.dart';
+import 'package:quran_tutor/Quran_Tutor/Quran_screen.dart';
+import 'package:quran_tutor/Quran_Tutor/Setting_screen.dart';
 
 import 'Search_screen.dart';
 
@@ -19,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   int selectIndex = 2 ;
-  List<Widget> _listWidget = [Setting(),QuranScreen(),HomePage1(),AudioScreen(),SearchScreen()] ;
+  List<Widget> _listWidget = [Setting(),QuranScreen(),HomePage(),AudioScreen(),SearchScreen()] ;
 
   @override
   Widget build(BuildContext context) {

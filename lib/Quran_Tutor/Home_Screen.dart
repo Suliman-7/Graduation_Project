@@ -7,16 +7,16 @@ import 'package:quran_tutor/models/Data.dart';
 import 'package:quran_tutor/services/api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Options/Favorites.dart';
-import '../Options/bookmark.dart';
+import '../Options/Bookmark.dart';
 
-class HomePage1 extends StatefulWidget {
-  const HomePage1({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<HomePage1> createState() => _HomePage1State();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePage1State extends State<HomePage1> {
+class _HomePageState extends State<HomePage> {
 
 
 

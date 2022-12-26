@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:quran_tutor/Quran_Tutor/home_page.dart';
-import 'package:quran_tutor/Quran_Tutor/surah_screen.dart';
+import 'package:quran_tutor/Quran_Tutor/Home_Screen.dart';
+import 'package:quran_tutor/Quran_Tutor/Surah_screen.dart';
 import 'Const/Const.dart';
 import 'Quran_Tutor/Onboarding_screen.dart';
 
