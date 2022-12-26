@@ -105,9 +105,9 @@ class verseDay {
   factory verseDay.fromJSON(Map <String, dynamic> json) {
     return verseDay(
       arText: json['data'][0]['text'],
-      enTran: json['data'][2]['text'],
-      surEnName: json['data'][2]['surah']['name'],
-      surNumber: json['data'][2]['numberInSurah']
+      enTran: json['data'][1]['text'],
+      surEnName: json['data'][0]['surah']['name'],
+      surNumber: json['data'][0]['numberInSurah']
     );
   }
 

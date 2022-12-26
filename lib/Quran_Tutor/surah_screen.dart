@@ -31,7 +31,7 @@ class _surah_screenState extends State<surah_screen> {
 
   // var SurTxt = "" ; 
   var Arr = [] ; 
-
+  var qn = ''; 
 
   @override
   Widget build(BuildContext context) {
@@ -54,18 +54,19 @@ class _surah_screenState extends State<surah_screen> {
 
                 var length = (snapshot.data!.surahlist.length-1);
                 var number =  index ;
-                var verse = (snapshot.data!.surahlist[index]);
 
-                if ((length)+1 == index){
-                  verse = (snapshot.data!.surahlist[index-1]); ;
-                }
+                
+
+                if ((length+1) != index){
+                var verse = (snapshot.data!.surahlist[index]); ;
+                
                 
 
 
                 
-
-                final Ver  = verse.verse;
-                String? editeted = "";
+                qn = verse.QuranNumber.toString();
+                // final Ver  = verse.verse;
+                // String? editeted = "";
               
                 if (number == 0) {
                     Arr.add("");
@@ -73,6 +74,7 @@ class _surah_screenState extends State<surah_screen> {
                   } else {
                     Arr.add("${verse.verse}   { ${(verse.verseNumber)} }");
                   }
+                }
                 // print(Arr[1]);
 
                 if (Const.surahIndex != 1) {
@@ -83,13 +85,13 @@ class _surah_screenState extends State<surah_screen> {
                   return Text(
                     'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20,color: Colors.black54),);
+                    style: TextStyle(fontSize: 20,color: Colors.black54,fontWeight: FontWeight.bold),);
                 }
                 else {
                 return TextButton(onPressed: ()
                 {
                   var choosedverse = Arr[index];
-                  var qn = verse.QuranNumber ;
+                  var Q = qn ;
                   openDialog(choosedverse,qn);
                                 // Navigator.pushNamed(context, surah_screen.id);
                                }, 
@@ -144,7 +146,7 @@ Future<void> openDialog(choosedverse, qn) async {
         children: [
           SimpleDialogOption(child: Text("Start Reading"),
           onPressed: () {
-          surah_screen.QN = qn ;
+          surah_screen.QN = (int.tryParse(qn)!)-1 ;
           Navigator.pushReplacement(context,MaterialPageRoute(builder: (context){return SpeechText();
           }));},),
 

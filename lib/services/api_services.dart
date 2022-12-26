@@ -66,7 +66,7 @@ class ApiService {
     }
     
     Future <verseDay> getVerseDay() async {
-      String url = "http://api.alquran.cloud/v1/ayah/${random(1,6237)}/editions/quran-uthmani,en.asad,en.pickthall";
+      String url = "http://api.alquran.cloud/v1/ayah/${random(1,6237)}/editions/quran-simple,en.pickthall";
       final Response = await http.get(Uri.parse(url));
 
       if (Response.statusCode == 200 ) {
