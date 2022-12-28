@@ -53,11 +53,13 @@ class ApiService {
       if (res.statusCode == 200 ){
         Map<String,dynamic> json = jsonDecode(res.body);
         json['data'].forEach((element){
+
           if(list.length<114){
             list.add(SurahList.fromJSON(element));
           }
+
         });
-        print('ol ${list.length}');
+        // print('ol ${list.length}');
         return list;
       }
         else{

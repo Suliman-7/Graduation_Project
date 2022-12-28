@@ -4,17 +4,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:quran_tutor/models/Data.dart';
 
 Widget surahCustomListTile({
-  required SurahList surah ,
+  required SurahList Sur ,
   required BuildContext context ,
-  required VoidCallback ontap})
+  required VoidCallback ontap
+  })
+
+
 {
   return GestureDetector(
+    
     onTap: ontap,
     child: Container(
       padding: EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 3.0)]
+        boxShadow: [BoxShadow(color: Colors.transparent, blurRadius: 3.0)]
       ),
       child: 
       Column(
@@ -23,32 +27,34 @@ Widget surahCustomListTile({
             children: [
               Container(
                 alignment: Alignment.center,
-                height: 30,
+                height: 40,
                 width: 40,
-                padding: EdgeInsets.all(4),
+                padding: EdgeInsets.all(2),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color.fromARGB(137, 239, 231, 193),
+                  color: Colors.black87,
                                          ),
-                child: Text((surah.number).toString(),
-                style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
+                child: Text((Sur.number).toString(),
+                style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
             ),
             SizedBox(width: 20,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(surah.englishName!,style: TextStyle(fontWeight: FontWeight.bold),),
-                Text("${surah.typeOfRevelation!} - ${surah.numberOfVerses} verses")
+                Text(Sur.englishName!,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 21),),
+                Text("${Sur.typeOfRevelation!} - ${Sur.numberOfVerses} Verses" , style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black54),)
               ],
             ),
             Spacer(),
-            Text(surah.name!,style: TextStyle(
-              color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20
+            Text(Sur.name!,style: TextStyle(
+              color: Colors.black,fontWeight: FontWeight.bold,fontSize: 24
             ),),
+
+            
             
           ],
         ),
-        Divider(thickness: 1,color: Colors.black,)
+        Divider(thickness: 3,color: Colors.black,)
       ]),
        ),
   );

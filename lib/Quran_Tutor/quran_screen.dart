@@ -39,23 +39,28 @@ class _QuranScreenState extends State<QuranScreen> {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20
                                             ),),
+
+                            
                           ],
                           ),
+                      
                       ),
         
         body: TabBarView(
           children: <Widget> [
             FutureBuilder(
-              future: apiService.getSurah(),
+              future: apiService.getSurah(), // list of surahs
               builder: (BuildContext context,
                          AsyncSnapshot<List<SurahList>> snapshot) {
                           
                         if (snapshot.hasData) {
+                          
                           List<SurahList>? surah = snapshot.data;
 
                           return ListView.builder(
                             itemCount: surah!.length,
-                            itemBuilder: (context, index)=> surahCustomListTile(surah: surah[index],
+                            itemBuilder: (context, index)=> surahCustomListTile(Sur: surah[index],
+                               
                                context: context, ontap : () {
                                 setState(() {
                                   Const.surahIndex = (index + 1);
@@ -69,6 +74,7 @@ class _QuranScreenState extends State<QuranScreen> {
                          }
               
               ),
+              
 
           ],
         ),

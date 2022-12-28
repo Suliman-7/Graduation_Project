@@ -71,21 +71,21 @@ class surahList {
 
 class SurahList {
 
-  int? number;
-  String? name;
+  int? number /* 0 */ ;
+  String? name /* Alfatiha */ ;
   String? englishName;
   int? numberOfVerses;
   String? typeOfRevelation;
 
   SurahList({this.number,this.name, this.englishName,this.numberOfVerses,this.typeOfRevelation});
 
-  factory SurahList.fromJSON(Map<String,dynamic> json){
+  factory SurahList.fromJSON(Map<String,dynamic> S){
     return SurahList(
-      number: json['number'],
-      name: json['name'],
-      englishName: json['englishName'],
-      numberOfVerses: json['numberOfAyahs'],
-      typeOfRevelation: json['revelationType']
+      number: S['number'],
+      name: S['name'],
+      englishName: S['englishName'],
+      numberOfVerses: S['numberOfAyahs'],
+      typeOfRevelation: S['revelationType']
                  );
 
 
