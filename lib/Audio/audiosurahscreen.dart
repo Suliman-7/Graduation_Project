@@ -28,10 +28,10 @@ class _AudioSurahScreenState extends State<AudioSurahScreen> {
       ),
       body: FutureBuilder(
         future: apiService.getSurah(),
-        builder: (BuildContext context , AsyncSnapshot<List<SurahList>> snapshot ){
+        builder: (BuildContext context , AsyncSnapshot<List<SurahData>> snapshot ){
 
           if (snapshot.hasData){
-            List<SurahList>? surah = snapshot.data;
+            List<SurahData>? surah = snapshot.data;
             return ListView.builder(
               itemCount: surah!.length,
               itemBuilder: ((context, index) => 

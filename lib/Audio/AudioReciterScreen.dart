@@ -14,7 +14,7 @@ class AudioReciterScreen extends StatefulWidget {
   const AudioReciterScreen({Key? key,required this.reciter , required this.index ,required this.list}) : super(key: key);
   final Reciter reciter;
   final int index;
-  final List<SurahList>? list;
+  final List<SurahData>? list;
 
   @override
   _AudioReciterScreenState createState() => _AudioReciterScreenState();

@@ -24,6 +24,7 @@ class Const {
 
 
 static int? surahIndex ;
+static String? SurahName ;
 
 }
 

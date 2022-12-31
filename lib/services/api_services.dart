@@ -47,15 +47,15 @@ class ApiService {
     
 
     final endPointUrl = "http://api.alquran.cloud/v1/surah" ;
-    List<SurahList> list = [] ;
-    Future <List<SurahList>> getSurah() async {
+    List<SurahData> list = [] ;
+    Future <List<SurahData>> getSurah() async {
       Response res = await http.get(Uri.parse(endPointUrl));
       if (res.statusCode == 200 ){
         Map<String,dynamic> json = jsonDecode(res.body);
         json['data'].forEach((element){
 
           if(list.length<114){
-            list.add(SurahList.fromJSON(element));
+            list.add(SurahData.fromJSON(element));
           }
 
         });

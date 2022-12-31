@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quran_tutor/Const/Const.dart';
-import 'package:quran_tutor/Quran_Tutor/surah_screen.dart';
+import 'package:quran_tutor/Quran_Tutor/Surah_screen.dart';
 import 'package:quran_tutor/services/api_services.dart';
 
 import '../models/Data.dart';
@@ -51,11 +51,11 @@ class _QuranScreenState extends State<QuranScreen> {
             FutureBuilder(
               future: apiService.getSurah(), // list of surahs
               builder: (BuildContext context,
-                         AsyncSnapshot<List<SurahList>> snapshot) {
+                         AsyncSnapshot<List<SurahData>> snapshot) {
                           
                         if (snapshot.hasData) {
                           
-                          List<SurahList>? surah = snapshot.data;
+                          List<SurahData>? surah = snapshot.data;
 
                           return ListView.builder(
                             itemCount: surah!.length,
@@ -64,6 +64,7 @@ class _QuranScreenState extends State<QuranScreen> {
                                context: context, ontap : () {
                                 setState(() {
                                   Const.surahIndex = (index + 1);
+                                  Const.SurahName = surah[index].name ;
                                 });
                                 Navigator.pushNamed(context, surah_screen.id);
                                } ),

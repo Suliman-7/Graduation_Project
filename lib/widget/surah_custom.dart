@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:quran_tutor/models/Data.dart';
 
 Widget surahCustomListTile({
-  required SurahList Sur ,
+  required SurahData Sur ,
   required BuildContext context ,
   required VoidCallback ontap
   })

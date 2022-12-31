@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' ;
-import 'package:quran_tutor/Quran_Tutor/surah_screen.dart' ;
+import 'package:quran_tutor/Quran_Tutor/Surah_screen.dart' ;
+
 
 class Favorites extends StatefulWidget {
   const Favorites({super.key});
@@ -16,7 +17,12 @@ class _FavoritesState extends State<Favorites> {
         appBar: AppBar(),
         body : ListView.builder(
         itemCount: surah_screen.Fav.length ,
-          itemBuilder: (context,index) { return Text(surah_screen.Fav[index]); } ),
+          itemBuilder: (context,index) { return Column(
+            children: [
+              Text(surah_screen.Fav[index]),
+              Text("X")
+            ],
+          ); } ),
       )
       
     );
