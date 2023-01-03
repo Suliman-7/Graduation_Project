@@ -3,10 +3,12 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:quran_tutor/models/Data.dart';
 
+
 Widget surahCustomListTile({
   required SurahData Sur ,
   required BuildContext context ,
   required VoidCallback ontap
+  
   })
 
 
@@ -45,10 +47,17 @@ Widget surahCustomListTile({
                 Text("${Sur.typeOfRevelation!} - ${Sur.numberOfVerses} Verses" , style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black54),)
               ],
             ),
-            Spacer(),
+            // Spacer(),
             Text(Sur.name!,style: TextStyle(
-              color: Colors.black,fontWeight: FontWeight.bold,fontSize: 24
-            ),),
+              color: Colors.black,fontWeight: FontWeight.bold,fontSize: 24),),
+
+            IconButton(
+              
+              onPressed: () {
+              SurahL.FavSur.add(Sur.name!) ; 
+              SurahL.FavSurNum.add(Sur.number!) ; 
+              }, 
+              icon: Icon(Icons.star))
 
             
             
@@ -58,4 +67,19 @@ Widget surahCustomListTile({
       ]),
        ),
   );
+}
+
+class SurahL extends StatefulWidget {
+  const SurahL({super.key});
+  static List FavSur = [] ; 
+  static List FavSurNum = [] ;
+  @override
+  State<SurahL> createState() => _SurahLState();
+}
+
+class _SurahLState extends State<SurahL> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
 }

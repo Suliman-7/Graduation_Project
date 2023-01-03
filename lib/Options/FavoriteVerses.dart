@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart' ;
-import 'package:quran_tutor/Quran_Tutor/Surah_screen.dart' ;
+import 'package:quran_tutor/Quran_Tutor/Surah_screen.dart';
 
 
-class Favorites extends StatefulWidget {
-  const Favorites({super.key});
+class FavoriteVerses extends StatefulWidget {
+  const FavoriteVerses({super.key});
 
   @override
-  State<Favorites> createState() => _FavoritesState();
+  State<FavoriteVerses> createState() => _FavoriteVersesState();
 }
 
-class _FavoritesState extends State<Favorites> {
+class _FavoriteVersesState extends State<FavoriteVerses> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -20,7 +20,6 @@ class _FavoritesState extends State<Favorites> {
           itemBuilder: (context,index) { return Column(
             children: [
               Text(surah_screen.Fav[index]),
-              Text("X")
             ],
           ); } ),
       )

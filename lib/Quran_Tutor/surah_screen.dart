@@ -1,7 +1,7 @@
 import 'dart:ffi';
 import 'package:flutter/material.dart' ;
 import 'package:quran_tutor/Options/Bookmark.dart';
-import 'package:quran_tutor/Options/Favorites.dart';
+import 'package:quran_tutor/Options/FavoriteVerses.dart';
 import 'package:quran_tutor/services/api_services.dart';
 import '../Const/Const.dart';
 import '../Options/Recite.dart';
@@ -41,26 +41,32 @@ class _surah_screenState extends State<surah_screen> {
       
 
       // floatingActionButtonLocation : FloatingActionButtonLocation.endFloat,
-      floatingActionButton : Row(
-        children: [
-          FloatingActionButton(
-          child : Icon(Icons.arrow_right),
-          onPressed: () {
-          setState(() {
-          Const.surahIndex = (Const.surahIndex! + 1) ;
-          });
-          Navigator.pushReplacementNamed(context, surah_screen.id);}),
-          
-          IconButton( icon : Icon(Icons.arrow_left),
-          color: Colors.black12,
-          onPressed: () {
-          setState(() {
-          Const.surahIndex = (Const.surahIndex! - 1) ;
-          });
-          Navigator.pushReplacementNamed(context, surah_screen.id);})
-          
+      floatingActionButton : Padding(
+        padding: const EdgeInsets.only(left : 30.0),
+        child: Row(
+          children: [
+            IconButton(icon : Icon(Icons.arrow_left),
+            onPressed: () {
+            if (Const.surahIndex! > 1) {
+            setState(() {
+            Const.surahIndex = (Const.surahIndex! - 1) ; 
+            Navigator.pushReplacementNamed(context, surah_screen.id);
+            });}}),
+
+            Spacer(),
+
+            IconButton(icon : Icon(Icons.arrow_right),
+            onPressed: () {
+            if (Const.surahIndex! < 114) {
+            setState(() {
+            Const.surahIndex = (Const.surahIndex! + 1) ; 
+            Navigator.pushReplacementNamed(context, surah_screen.id);
+            });
+            }}),
+            
 
     ]),
+      ),
 
       
 

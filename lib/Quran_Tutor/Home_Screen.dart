@@ -2,11 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
-import 'package:quran_tutor/Options/Favorites.dart';
+import 'package:quran_tutor/Options/FavoriteSurahs.dart';
+import 'package:quran_tutor/Options/FavoriteVerses.dart';
 import 'package:quran_tutor/models/Data.dart';
 import 'package:quran_tutor/services/api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../Options/Favorites.dart';
+import '../Options/FavoriteVerses.dart';
 import '../Options/Bookmark.dart';
 
 class HomePage extends StatefulWidget {
@@ -173,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                   Spacer(),
                   Column(children: [
                     Container(child: IconButton(icon: Icon(Icons.star), onPressed: () {
-                    Navigator.push(context,MaterialPageRoute(builder: (context){return Favorites();}));
+                    Navigator.push(context,MaterialPageRoute(builder: (context){return FavoriteSurahs();}));
                       },)),
                     Container(child: Text("Favorite Surah" , textAlign: TextAlign.center, 
                     style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),)
@@ -181,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                   Spacer(),
                   Column(children: [
                     Container(child: IconButton(icon: Icon(Icons.star), onPressed: () {
-                    Navigator.push(context,MaterialPageRoute(builder: (context){return Favorites();}));
+                    Navigator.push(context,MaterialPageRoute(builder: (context){return FavoriteVerses();}));
                       },)),
                     Container(child: Text("Favorites Verse" , textAlign: TextAlign.center, 
                     style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),)
