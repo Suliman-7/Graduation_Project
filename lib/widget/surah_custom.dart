@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:quran_tutor/Const/Const.dart';
 
 import 'package:quran_tutor/models/Data.dart';
 
@@ -54,6 +55,7 @@ Widget surahCustomListTile({
             IconButton(
               
               onPressed: () {
+              Const.SurahName = Sur.name! ;
               SurahL.FavSur.add(Sur.name!) ; 
               SurahL.FavSurNum.add(Sur.number!) ; 
               }, 

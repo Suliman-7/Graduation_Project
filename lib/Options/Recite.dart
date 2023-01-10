@@ -69,7 +69,7 @@ class _SpeechTextState extends State<SpeechText> {
           children: [
                 FutureBuilder (
          
-        future: apiService.getV(Const.surahIndex!), 
+        future: apiService.getVC(Const.surahIndex!), 
         builder: (BuildContext context, AsyncSnapshot<verseCList> snapshot) {
 
           if(snapshot.connectionState == ConnectionState.waiting){

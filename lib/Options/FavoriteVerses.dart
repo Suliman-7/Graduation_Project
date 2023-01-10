@@ -16,7 +16,7 @@ class _FavoriteVersesState extends State<FavoriteVerses> {
       child : Scaffold (
         appBar: AppBar(),
         body : ListView.builder(
-        itemCount: surah_screen.Fav.length ,
+          itemCount: surah_screen.Fav.length ,
           itemBuilder: (context,index) { return Column(
             children: [
               Text(surah_screen.Fav[index]),

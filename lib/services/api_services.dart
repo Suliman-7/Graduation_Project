@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
+import 'package:quran_tutor/Quran_Tutor/Search_screen.dart';
 import 'package:quran_tutor/models/Data.dart';
 import 'package:http/http.dart' as http ;
 
@@ -11,6 +12,29 @@ import '../models/Data.dart';
 
 
 class ApiService {
+
+    
+    List<SearchVerse> VSList = [] ;
+    Future <List<SearchVerse>> getSearched() async {
+      int index = 0 ; 
+      final endPointUrl = "https://api.alquran.cloud/v1/ayah/${index}/editions/quran-simple-clean" ;
+      Response res = await http.get(Uri.parse(endPointUrl));
+      if (res.statusCode == 200 ){
+        Map<String,dynamic> json = jsonDecode(res.body);
+        json['data'].forEach((element){
+
+          if(VSList.length<6237){
+            VSList.add(SearchVerse.fromJSON(element));
+            index++;
+          }
+
+        });
+        return VSList;
+      }
+        else{
+          throw("Can't get the Surah");
+        }
+    }
 
     List<Reciter> ReciterList = [];
     Future<List<Reciter>> getReciterList() async{
@@ -25,7 +49,6 @@ class ApiService {
       ReciterList.sort((a,b)=>a.name!.compareTo(b.name!));
       return ReciterList;
     }
-
     
     
     Future <surahList> getverses(int index) async {
@@ -37,7 +60,7 @@ class ApiService {
 
 
 
-    Future <verseCList> getV(int index) async {
+    Future <verseCList> getVC(int index) async {
       final Url = "https://api.alquran.cloud/v1/surah/${index}/editions/quran-simple-clean" ;
       var res = await http.get(Uri.parse(Url));
 
@@ -77,7 +100,6 @@ class ApiService {
       else {
         print('failed to load');
         throw Exception("Failed to load Post");
-      
     }
     }
     random(min,max){

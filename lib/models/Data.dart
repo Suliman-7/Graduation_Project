@@ -5,6 +5,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 
+class SearchVerse{
+
+  String? searchverse  ;
+  
+  SearchVerse({this.searchverse});
+
+  factory SearchVerse.fromJSON(Map<String,dynamic> json){
+    return SearchVerse(
+      searchverse : json['text'],
+    );
+  }
+}
 
 class Versec {
   String? verseClean ;
