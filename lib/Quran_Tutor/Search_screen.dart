@@ -1,4 +1,10 @@
-import 'package:flutter/material.dart' ; 
+import 'package:flutter/material.dart' ;
+import 'package:quran_tutor/Quran_Tutor/Surah_screen.dart' ;
+import 'package:quran_tutor/services/api_services.dart' ;
+import 'package:quran_tutor/models/Data.dart' ;
+
+import '../Const/Const.dart';
+import '../widget/surah_custom.dart'; 
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -8,6 +14,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  
   @override
   Widget build(BuildContext context) {
     return 
@@ -25,6 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
 class DataSearch extends SearchDelegate {
   List VersesSearch = [] ;
+  ApiService apiService = ApiService();
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -44,7 +52,27 @@ class DataSearch extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return Text("محتوى البحث");
+    return FutureBuilder(
+              future: apiService.getSearched(), 
+              builder: (BuildContext context,
+                         AsyncSnapshot<List<SearchVerse>> snapshot) {
+                          
+                        if (snapshot.hasData) {
+                          
+                          List<SearchVerse>? SearchV = snapshot.data;
+
+                          return ListView.builder(
+                            itemCount: SearchV!.length,
+                            itemBuilder: (context, index)=> 
+                               Text(SearchV[index].toString()),
+                          
+                              
+                            );
+                        }
+                        return Center(child: CircularProgressIndicator(),);
+                         }
+              
+              );
   }
 
 }

@@ -17,7 +17,7 @@ class ApiService {
     List<SearchVerse> VSList = [] ;
     Future <List<SearchVerse>> getSearched() async {
       int index = 0 ; 
-      final endPointUrl = "https://api.alquran.cloud/v1/ayah/${index}/editions/quran-simple-clean" ;
+      final endPointUrl = "http://api.alquran.cloud/v1/quran/quran-simple-clean" ;
       Response res = await http.get(Uri.parse(endPointUrl));
       if (res.statusCode == 200 ){
         Map<String,dynamic> json = jsonDecode(res.body);
