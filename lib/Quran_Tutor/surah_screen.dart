@@ -34,7 +34,7 @@ class _surah_screenState extends State<surah_screen> {
     return Scaffold(
     
       appBar: AppBar(
-        title: Text(Const.SurahName.toString(),),
+        title: Text( Const.SurahName.toString() ),
             centerTitle: true,
             backgroundColor: Colors.black54,),
 
@@ -45,17 +45,18 @@ class _surah_screenState extends State<surah_screen> {
         padding: const EdgeInsets.only(left : 30.0),
         child: Row(
           children: [
-            IconButton(icon : Icon(Icons.arrow_left),
+            IconButton(icon : Const.surahIndex==1? const SizedBox(): Icon(Icons.arrow_left),
             onPressed: () {
             if (Const.surahIndex! > 1) {
             setState(() {
             Const.surahIndex = (Const.surahIndex! - 1) ; 
+            Const.SurahName = Const.surahList?[ Const.surahIndex??0].name??'';
             Navigator.pushReplacementNamed(context, surah_screen.id);
             });}}),
 
             Spacer(),
 
-            IconButton(icon : Icon(Icons.arrow_right),
+            IconButton(icon : Const.surahIndex==114? const SizedBox():  Icon(Icons.arrow_right),
             onPressed: () {
             if (Const.surahIndex! < 114) {
             setState(() {

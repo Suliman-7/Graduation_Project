@@ -1,8 +1,12 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:quran_tutor/models/Data.dart';
 
 class Const {
+
+
+
 
   static const kPrimary = Color(0xff8a51d1);
 
@@ -25,6 +29,8 @@ class Const {
 
 static int? surahIndex ;
 static String? SurahName ;
+static List<SurahData>? surahList; 
+
 
 }
 

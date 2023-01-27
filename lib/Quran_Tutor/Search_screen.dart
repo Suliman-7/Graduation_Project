@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart' ;
+import 'package:http/http.dart';
 import 'package:quran_tutor/Quran_Tutor/Surah_screen.dart' ;
 import 'package:quran_tutor/services/api_services.dart' ;
 import 'package:quran_tutor/models/Data.dart' ;
-
+import 'package:http/http.dart' as http ;
 import '../Const/Const.dart';
 import '../widget/surah_custom.dart'; 
+import 'dart:convert' ;
+import 'dart:math';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -31,12 +34,14 @@ class _SearchScreenState extends State<SearchScreen> {
 }
 
 class DataSearch extends SearchDelegate {
-  List VersesSearch = [] ;
+  List<SearchVerse> VersesSearch = [] ;
   ApiService apiService = ApiService();
+  
+  
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
-      IconButton(onPressed: () {}, icon: Icon(Icons.close)),
+      IconButton(onPressed: () {query = '' ;}, icon: Icon(Icons.close)),
     ] ;
   }
 
@@ -51,28 +56,38 @@ class DataSearch extends SearchDelegate {
   }
 
   @override
-  Widget buildSuggestions(BuildContext context) {
-    return FutureBuilder(
-              future: apiService.getSearched(), 
-              builder: (BuildContext context,
-                         AsyncSnapshot<List<SearchVerse>> snapshot) {
-                          
-                        if (snapshot.hasData) {
-                          
-                          List<SearchVerse>? SearchV = snapshot.data;
+    List<SearchVerse> VSList = [] ;
+    Future <List<SearchVerse>> getSearched() async {
+      int index = 0 ; 
+      final endPointUrl = "https://api.alquran.cloud/v1/search/${query}/all/quran-simple-clean" ;
+      Response res = await http.get(Uri.parse(endPointUrl));
+      if (res.statusCode == 200 ){
+        Map<String,dynamic> json = jsonDecode(res.body);
+        json['data'].forEach((element){
 
-                          return ListView.builder(
-                            itemCount: SearchV!.length,
+          if(VSList.length<6237){
+            VSList.add(SearchVerse.fromJSON(element));
+            print(VSList[element]);
+            index++;
+          }
+
+        });
+        return VSList;
+      }
+        else{
+          throw("Can't get the Surah");
+        }
+    }
+  Widget buildSuggestions(BuildContext context) {
+    return ListView.builder(
+                            itemCount: VSList.length,
                             itemBuilder: (context, index)=> 
-                               Text(SearchV[index].toString()),
+                               Text(VSList[index].toString()),
                           
                               
                             );
                         }
-                        return Center(child: CircularProgressIndicator(),);
+                        
                          }
               
-              );
-  }
-
-}
+              
