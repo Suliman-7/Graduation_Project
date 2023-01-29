@@ -13,7 +13,7 @@ class SearchVerse{
 
   factory SearchVerse.fromJSON(Map<String,dynamic> json){
     return SearchVerse(
-      searchverse : json['matches']['text'],
+      searchverse : json['text'],
     );
   }
 }

@@ -41,7 +41,7 @@ class DataSearch extends SearchDelegate {
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
-      IconButton(onPressed: () {query = '' ;}, icon: Icon(Icons.close)),
+      IconButton(onPressed: () {query = '';}, icon: Icon(Icons.close)),
     ] ;
   }
 
@@ -56,38 +56,38 @@ class DataSearch extends SearchDelegate {
   }
 
   @override
-    List<SearchVerse> VSList = [] ;
-    Future <List<SearchVerse>> getSearched() async {
-      int index = 0 ; 
-      final endPointUrl = "https://api.alquran.cloud/v1/search/${query}/all/quran-simple-clean" ;
-      Response res = await http.get(Uri.parse(endPointUrl));
-      if (res.statusCode == 200 ){
-        Map<String,dynamic> json = jsonDecode(res.body);
-        json['data'].forEach((element){
-
-          if(VSList.length<6237){
-            VSList.add(SearchVerse.fromJSON(element));
-            print(VSList[element]);
-            index++;
-          }
-
-        });
-        return VSList;
-      }
-        else{
-          throw("Can't get the Surah");
-        }
-    }
+  List<SearchVerse> VSList = [] ;
   Widget buildSuggestions(BuildContext context) {
-    return ListView.builder(
-                            itemCount: VSList.length,
-                            itemBuilder: (context, index)=> 
-                               Text(VSList[index].toString()),
+    return FutureBuilder(
+              future: apiService.getSearched(), 
+              builder: (BuildContext context,
+                         AsyncSnapshot<List<SearchVerse>> snapshot) {
                           
-                              
-                            );
+                        if (snapshot.hasData) {
+                          
+                          List<SearchVerse>? SearchV = snapshot.data;
+
+                          List filterverses = [] ;
+                          
+                          return ListView.builder(
+                            itemCount: SearchV!.length ,
+                            itemBuilder: (context, i) {
+                            if (SearchV![i].searchverse.toString().contains(query) ){
+                              filterverses.add(SearchV[i]);
+                              print(filterverses);
+                            }
+                            return Container(
+                              padding: EdgeInsets.all(10),
+                              child: Text(
+                                query == "" ? "" : "${filterverses[i]}" ,
+                                style: TextStyle(fontSize: 25),
+                              ),);
+                        });
                         }
-                        
+                        return Center(child: CircularProgressIndicator(),);
                          }
               
-              
+              );
+  }
+
+}

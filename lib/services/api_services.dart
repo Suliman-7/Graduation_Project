@@ -13,8 +13,27 @@ import '../models/Data.dart';
 
 class ApiService {
 
-    
-    
+    List<SearchVerse> VSList = [] ;
+    Future <List<SearchVerse>> getSearched() async {
+      int index = 0 ; 
+      final endPointUrl = "https://api.alquran.cloud/v1/search/${" "}/all/quran-simple-clean" ;
+      Response res = await http.get(Uri.parse(endPointUrl));
+      if (res.statusCode == 200 ){
+        Map<String,dynamic> json = jsonDecode(res.body);
+        json['data']['matches'].forEach((element){
+
+          if(VSList.length<6234){
+            VSList.add(SearchVerse.fromJSON(element));
+            index++;
+          }
+
+        });
+        return VSList;
+      }
+        else{
+          throw("Can't get the Surah");
+        }
+    }
 
 
 
