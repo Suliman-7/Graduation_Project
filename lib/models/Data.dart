@@ -51,16 +51,16 @@ class Surah {
 
   int? verseNumber ; 
   String? verse ;
-  int? QuranNumber ; 
+
   
 
-  Surah({this.verse,this.verseNumber,this.QuranNumber});
+  Surah({this.verse,this.verseNumber});
 
   factory Surah.fromJSON(Map<String,dynamic> json){
     return Surah(
       verseNumber: json['numberInSurah'],
       verse: json['text'],
-      QuranNumber: json['numberInSurah']
+ 
                  );
 }}
 

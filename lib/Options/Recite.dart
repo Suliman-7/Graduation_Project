@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:quran_tutor/Quran_Tutor/surah_screen.dart';
+import 'package:quran_tutor/Quran_Tutor/Surah_screen.dart';
 import 'package:quran_tutor/services/api_services.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
@@ -76,17 +76,21 @@ class _SpeechTextState extends State<SpeechText> {
             return Center(child: CircularProgressIndicator(),);
           }
 
-          if (snapshot.hasData){ 
+          else if (snapshot.hasData){ 
             var V = null ;   
-            if (surah_screen.QN == 0) {
-            V = snapshot.data!.verseList[(surah_screen.QN)+1];
+            if (surah_screen.VN == 0) {
+            V = snapshot.data!.verseList[(surah_screen.VN)+1];
             }
             else {
-            V = snapshot.data!.verseList[(surah_screen.QN)-1];
+            V = snapshot.data!.verseList[(surah_screen.VN)-1];
             }
             var vc = V.verseClean ;
             SpeechText.VERSEC = vc! ; 
             var VC = SpeechText.VERSEC ;
+            SpeechText.VERSEC = SpeechText.VERSEC.replaceAll("بسم الله الرحمن الرحيم", "");
+            VC = VC.replaceAll("بسم الله الرحمن الرحيم ", "");
+            VC = VC.replaceAll("الم", "ا ل م");
+            VC = VC.replaceAll("كهيعص", "ك ه ي ع ص");
             VC = VC.replaceAll("أ", "ا");
             VC = VC.replaceAll("إ", "ا");
             VC = VC.replaceAll("آ", "ا");
