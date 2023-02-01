@@ -66,20 +66,25 @@ class DataSearch extends SearchDelegate {
                         if (snapshot.hasData) {
                           
                           List<SearchVerse>? SearchV = snapshot.data;
-
-                          List filterverses = [] ;
+                          List SV = [] ;
+                          for (int i=0 ; i<SearchV!.length ; i++){
+                           SV.add(SearchV[i].searchverse);
+                          }
                           
+
+                          List FSV = SV.where((element) => element.toString().contains(query)).toList();
+
+
+
+
                           return ListView.builder(
-                            itemCount: SearchV!.length ,
+                            itemCount: FSV.length ,
                             itemBuilder: (context, i) {
-                            if (SearchV![i].searchverse.toString().contains(query) ){
-                              filterverses.add(SearchV[i]);
-                              print(filterverses);
-                            }
+                            
                             return Container(
                               padding: EdgeInsets.all(10),
                               child: Text(
-                                query == "" ? "" : "${filterverses[i]}" ,
+                                query == "" ? "" : "${FSV[i]}" ,
                                 style: TextStyle(fontSize: 25),
                               ),);
                         });

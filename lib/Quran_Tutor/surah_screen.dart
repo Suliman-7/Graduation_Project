@@ -91,9 +91,9 @@ class _surah_screenState extends State<surah_screen> {
               
           if (number == 0) {
               Arr.add("");
-              Arr.add(' ﴾${verse.verse}﴿ ${(verse.verseNumber)} ' );                   
+              Arr.add(" ﴾ ${verse.verse} ﴿ ${(verse.verseNumber)}  ");                   
             } else {
-              Arr.add(" ﴾${verse.verse}﴿ ${(verse.verseNumber)} ");
+              Arr.add("  ${verse.verse} ﴾ ﴿ ${(verse.verseNumber)}  ");
             }
 
 
@@ -101,13 +101,13 @@ class _surah_screenState extends State<surah_screen> {
           Arr[1] = Arr[1].toString().replaceAll('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ' , '');
           }
 
-          if (index==0 && Const.surahIndex != 1){
+          if (index==0 && Const.surahIndex != 1 && Const.surahIndex != 9){
             return Text(
               'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20,color: Colors.black54,fontWeight: FontWeight.bold),);
           }
-          else if (index==0 && Const.surahIndex == 1){
+          else if (index==0 && (Const.surahIndex == 1 || Const.surahIndex == 9) ){
             return Text("");
           }
           else {
@@ -121,7 +121,7 @@ class _surah_screenState extends State<surah_screen> {
 
                   child: Container(
                   padding: EdgeInsets.all(8.0),
-                  color: Color.fromARGB(255, 117, 123, 120),
+                  // color: Color.fromARGB(255, 117, 123, 120),
                   child: Text("${Arr[index]}",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.black87),)));

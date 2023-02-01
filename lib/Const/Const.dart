@@ -5,9 +5,6 @@ import 'package:quran_tutor/models/Data.dart';
 
 class Const {
 
-
-
-
   static const kPrimary = Color(0xff8a51d1);
 
   static const MaterialColor switchColor = const MaterialColor

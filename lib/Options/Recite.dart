@@ -18,7 +18,7 @@ class SpeechText extends StatefulWidget {
 }
 
 class _SpeechTextState extends State<SpeechText> {
-  String recognizedText = "Recognize text is";
+  String recognizedText = "";
   bool isEnabled = false;
   ApiService apiService = ApiService() ;
   @override
@@ -49,19 +49,7 @@ class _SpeechTextState extends State<SpeechText> {
         centerTitle: true,
         title: const Text("Speech to Text"),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        margin: const EdgeInsets.only(bottom: 10),
-        child: FloatingActionButton(
-            child: !SpeechTextRecognizer.isListning()
-                ? const Icon(Icons.mic)
-                : const Icon(Icons.stop),
-            onPressed: () {
-              SpeechTextRecognizer.isListning()
-                  ? SpeechTextRecognizer.stopListning
-                  : _recognizedText();
-            }),
-      ),
+
       body: Container(
         padding: const EdgeInsets.all(10),
         child: Column(
@@ -88,9 +76,12 @@ class _SpeechTextState extends State<SpeechText> {
             SpeechText.VERSEC = vc! ; 
             var VC = SpeechText.VERSEC ;
             SpeechText.VERSEC = SpeechText.VERSEC.replaceAll("بسم الله الرحمن الرحيم", "");
+            recognizedText = recognizedText.replaceAll("ا ل م", "الم");
+            recognizedText = recognizedText.replaceAll("ح م", "حم");
+            recognizedText = recognizedText.replaceAll("ط س م", "طسم");
             VC = VC.replaceAll("بسم الله الرحمن الرحيم ", "");
-            VC = VC.replaceAll("الم", "ا ل م");
             VC = VC.replaceAll("كهيعص", "ك ه ي ع ص");
+            VC = VC.replaceAll("ابت", "ابتي");
             VC = VC.replaceAll("أ", "ا");
             VC = VC.replaceAll("إ", "ا");
             VC = VC.replaceAll("آ", "ا");
@@ -98,6 +89,7 @@ class _SpeechTextState extends State<SpeechText> {
             VC = VC.replaceAll(" ۛ", "");
             VC = VC.replaceAll(" ۚ", "");
             VC = VC.replaceAll("ة","ه");
+            VC = VC.replaceAll("۞ ","");
             print(VC);
             if (recognizedText==VC){
 
@@ -106,20 +98,35 @@ class _SpeechTextState extends State<SpeechText> {
             else {
               print("Wrong");
             }
-            return Text("${SpeechText.VERSEC}");
+            return Center(
+              child: Column(
+                children: [
+                  Container(
+                  padding: EdgeInsets.all(20),
+                  child: Text("${SpeechText.VERSEC}",style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+                  ),
+                  TextButton(child: Text("Start Recite") , onPressed: () {
+                  _recognizedText();
+                  }),
+                  Container(
+                  padding: EdgeInsets.all(20),
+                  child: Text("${recognizedText}",style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+                  ),
+                  Container(
+                  padding: EdgeInsets.all(20),
+                  child: recognizedText==VC ? Text("Correct",style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.green)) : 
+                  Text("Wrong",style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.red)),
+                  ),
+                ],
+              ),
+            );
           }
 
           else return Center(child: Text("verse not found"),);
           }
 
     ),
-            const SizedBox(height: 15),
             
-            Text(
-              recognizedText,
-
-              style: const TextStyle(fontSize: 18),
-            ),
             
           ],
         ),
