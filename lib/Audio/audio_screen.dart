@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:quran_tutor/models/Data.dart';
 import 'package:quran_tutor/services/api_services.dart';
 
-import 'ReciterScreen.dart';
-import 'audiosurahscreen.dart';
+import '../Quran_Tutor/ReciterScreen.dart';
+import 'AudioReciterScreen.dart' ;
+import 'audiosurahscreen.dart' ;
 
 
 class AudioScreen extends StatefulWidget {

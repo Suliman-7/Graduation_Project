@@ -407,6 +407,8 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
     // Try to load audio from a source and catch any errors.
     try {
       var url = "https://download.quranicaudio.com/quran/${reciter.path}$ind.mp3";
+      print("AAAAA ${reciter.path}");
+      print("BBBBB ${ind}");
       print('url $url');
      defaultDuration =  (await _player.setAudioSource(AudioSource.uri(Uri.parse(url))))!;
     } catch (e) {
@@ -538,7 +540,7 @@ void showSliderDialog({
                   height: 100.0,
                   child: Column(
                     children: [
-                      Text('${snapshot.data?.toStringAsFixed(1)}$valueSuffix',
+                      Text('AAA ${snapshot.data?.toStringAsFixed(1)}$valueSuffix',
                           style: TextStyle(
                               fontFamily: 'Fixed',
                               fontWeight: FontWeight.bold,

@@ -19,7 +19,7 @@ class _FavoriteSurahsState extends State<FavoriteSurahs> {
     return SafeArea(
       child : Scaffold (
         appBar: AppBar(),
-        body : ListView.builder(
+        body : SurahL.FavSur.length>0 ? ListView.builder(
         itemCount: SurahL.FavSur.length ,
           itemBuilder: (context,index) { return Column(
             children: [
@@ -31,7 +31,7 @@ class _FavoriteSurahsState extends State<FavoriteSurahs> {
             }); 
             })
             ],
-          ); } ),
+          ); } ) : Text("There is no favorite Surah"),
       )
       
     );

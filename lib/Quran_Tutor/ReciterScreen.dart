@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:matcher/matcher.dart';
 import 'package:quran_tutor/models/Data.dart';
-import 'audio_screen.dart' ;
+import '../Audio/audio_screen.dart' ;
 
 class ReciterScreen extends StatefulWidget {
   const ReciterScreen({Key? key , required this.reciter , required this.ontap }) : super(key:key);

@@ -44,16 +44,16 @@ Widget surahCustomListTile({
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(Sur.englishName!,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 21),),
+                Text(Sur.englishName!,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 21,color: Colors.black54),),
                 Text("${Sur.typeOfRevelation!} - ${Sur.numberOfVerses} Verses" , style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black54),)
               ],
             ),
-            // Spacer(),
+            Spacer(),
             Text(Sur.name!,style: TextStyle(
               color: Colors.black,fontWeight: FontWeight.bold,fontSize: 24),),
-
+            Spacer(),
             IconButton(
-              
+              color: Colors.black,
               onPressed: () {
               Const.SurahName = Sur.name! ;
               SurahL.FavSur.add(Sur.name!) ; 

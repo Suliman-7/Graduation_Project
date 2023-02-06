@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter/material.dart';
 import 'package:quran_tutor/Quran_Tutor/Home_Screen.dart';
 import 'package:quran_tutor/Quran_Tutor/Surah_screen.dart';
@@ -34,14 +34,15 @@ void main() {
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
-
+  
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  int selectIndex = 2 ;
-  List<Widget> _listWidget = [Setting(),QuranScreen(),HomePage(),AudioScreen(),SearchScreen()] ;
+  int selectIndex = 1;
+  List<Widget> _listWidget = [QuranScreen(),HomePage(),AudioScreen()] ;
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -62,18 +63,20 @@ class _MyAppState extends State<MyApp> {
         ]),
         body: _listWidget[selectIndex],
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor : Color.fromARGB(221, 237, 231, 231) ,
+          selectedItemColor : Color.fromARGB(255, 23, 66, 87),
+          selectedFontSize: 15,
+          unselectedItemColor : Color.fromARGB(255, 125, 132, 133), 
+          
 
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.settings,size: 60,), label: 'Setting',),
-            BottomNavigationBarItem(icon: Icon(Icons.book,size: 60,), label: 'Quran',),
-            BottomNavigationBarItem(icon: Icon(Icons.home,size: 60,), label: 'Home',),
-            BottomNavigationBarItem(icon: Icon(Icons.audio_file,size: 60,), label: 'Audio',),
-            BottomNavigationBarItem(icon: Icon(Icons.search,size: 60,), label: 'Search',),
+            BottomNavigationBarItem(icon: Icon(Icons.book_rounded,size: 50,), label: 'Quran'),
+            BottomNavigationBarItem(icon: Icon(Icons.home,size: 50,), label: 'Home',),
+            BottomNavigationBarItem(icon: Icon(Icons.audio_file,size: 50,), label: 'Audio',),
                  ],
               
               // onTap: update,
-              selectedItemColor: Colors.black,
-              unselectedItemColor: Colors.black12,
+
               
               currentIndex: selectIndex,
               onTap : (index) {

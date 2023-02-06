@@ -15,13 +15,13 @@ class _FavoriteVersesState extends State<FavoriteVerses> {
     return SafeArea(
       child : Scaffold (
         appBar: AppBar(),
-        body : ListView.builder(
+        body : surah_screen.Fav.length > 0 ? ListView.builder(
           itemCount: surah_screen.Fav.length ,
           itemBuilder: (context,index) { return Column(
             children: [
               Text(surah_screen.Fav[index]),
             ],
-          ); } ),
+          ); } ) : Text("There is no favorite Verse"),
       )
       
     );

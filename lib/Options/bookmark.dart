@@ -20,7 +20,7 @@ class _bookmarkState extends State<bookmark> {
         appBar: AppBar(),
         body : Column(
           children: [
-            Text(surah_screen.BV),
+            Text(surah_screen.BV == '' ? surah_screen.BV : "There is No bookmarked Verse"),
             
           ],
         ),

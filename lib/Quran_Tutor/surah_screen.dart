@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'package:flutter/material.dart' ;
+import 'package:flutter_share/flutter_share.dart';
 import 'package:quran_tutor/Options/Bookmark.dart';
 import 'package:quran_tutor/Options/FavoriteVerses.dart';
 import 'package:quran_tutor/services/api_services.dart';
@@ -91,9 +92,9 @@ class _surah_screenState extends State<surah_screen> {
               
           if (number == 0) {
               Arr.add("");
-              Arr.add(" ﴾ ${verse.verse} ﴿ ${(verse.verseNumber)}  ");                   
+              Arr.add(" ${verse.verse} { ${verse.verseNumber} } ");                   
             } else {
-              Arr.add("  ${verse.verse} ﴾ ﴿ ${(verse.verseNumber)}  ");
+              Arr.add(" ${verse.verse} { ${verse.verseNumber} } ");
             }
 
 
@@ -121,7 +122,6 @@ class _surah_screenState extends State<surah_screen> {
 
                   child: Container(
                   padding: EdgeInsets.all(8.0),
-                  // color: Color.fromARGB(255, 117, 123, 120),
                   child: Text("${Arr[index]}",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.black87),)));
@@ -134,37 +134,67 @@ class _surah_screenState extends State<surah_screen> {
 
 
 Future<void> openDialog(choosedverse,vn) async {
-  switch( await showDialog(
+  switch ( await showDialog(
     context: context, 
     builder: (BuildContext context) {
       return SimpleDialog(
-        title: Text("select option"),
+        title: 
+        Text("Select Option" , textAlign: TextAlign.center,),
         children: [
 
-          SimpleDialogOption(child: Text("Start Reading"),
+          SimpleDialogOption(
+          child : Row(children: [
+            Icon(Icons.record_voice_over),
+            SizedBox(width: 20,),
+            Text("Recite"),
+          ],),
           onPressed: () {
-          surah_screen.VN = (int.tryParse(vn)!)-1 ;
-          print(surah_screen.VN);
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context){return SpeechText();
-          }));},),
+          surah_screen.VN = int.tryParse(vn)!-1 ;
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context){return SpeechText();}));
+          },),
 
 
-          SimpleDialogOption(child: Text("Favorite verse"),
+          SimpleDialogOption(
+          child : Row(children: [
+            Icon(Icons.star_outline),
+            SizedBox(width: 20,),
+            Text("Favorite"),
+          ],),
           onPressed: () {
             surah_screen.Fav.add(choosedverse);
           },),
 
-          SimpleDialogOption(child: Text("Bookmark verse"),
+          SimpleDialogOption(
+          child : Row(children: [
+            Icon(Icons.bookmark_add),
+            SizedBox(width: 20,),
+            Text("Bookamrk"),
+          ],),
           onPressed: () {
           surah_screen.BV = choosedverse ; 
-          Navigator.push(context,MaterialPageRoute(builder: (context){return bookmark();}));
           },),
 
-          SimpleDialogOption(child: Text("Share verse"),
+          SimpleDialogOption(child: 
+          Row(children: [
+            Icon(Icons.share),
+            SizedBox(width: 20,),
+            Text("Share"),
+          ],) ,
           onPressed: () {
-            var Sharedverse = choosedverse ;
-            print(Sharedverse);
+            share(choosedverse) ;
+            // await Share.share(Sharedverse);
           },),
         ],
       );
-    })){}}}
+    })){}}
+    
+    Future<void> share(var Verse) async {
+    await FlutterShare.share(
+      title: Verse,
+      text: Verse,
+      chooserTitle: 'Example Chooser Title'
+    );
+  }
+    
+    
+    }

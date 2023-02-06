@@ -6,7 +6,6 @@ import 'package:quran_tutor/services/api_services.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:quran_tutor/Quran_Tutor/SpeechText.dart';
-
 import '../Const/Const.dart';
 import '../models/Data.dart';
 
@@ -60,11 +59,7 @@ class _SpeechTextState extends State<SpeechText> {
         future: apiService.getVC(Const.surahIndex!), 
         builder: (BuildContext context, AsyncSnapshot<verseCList> snapshot) {
 
-          if(snapshot.connectionState == ConnectionState.waiting){
-            return Center(child: CircularProgressIndicator(),);
-          }
-
-          else if (snapshot.hasData){ 
+          if (snapshot.hasData){ 
             var V = null ;   
             if (surah_screen.VN == 0) {
             V = snapshot.data!.verseList[(surah_screen.VN)+1];
@@ -91,13 +86,7 @@ class _SpeechTextState extends State<SpeechText> {
             VC = VC.replaceAll("ة","ه");
             VC = VC.replaceAll("۞ ","");
             print(VC);
-            if (recognizedText==VC){
 
-              print("Correct");
-            }
-            else {
-              print("Wrong");
-            }
             return Center(
               child: Column(
                 children: [
@@ -107,6 +96,15 @@ class _SpeechTextState extends State<SpeechText> {
                   ),
                   TextButton(child: Text("Start Recite") , onPressed: () {
                   _recognizedText();
+                  
+                  if (VC == recognizedText) {
+                    
+                  surah_screen.VN = surah_screen.VN + 1 ; 
+                  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context){return SpeechText();}));
+
+                  }
+                  else {}
+
                   }),
                   Container(
                   padding: EdgeInsets.all(20),
@@ -114,23 +112,25 @@ class _SpeechTextState extends State<SpeechText> {
                   ),
                   Container(
                   padding: EdgeInsets.all(20),
-                  child: recognizedText==VC ? Text("Correct",style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.green)) : 
-                  Text("Wrong",style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.red)),
+                  child: recognizedText=="" ?
+                  Text("") : 
+                  recognizedText==VC ?
+                  
+                  Text("Correct",style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.green)) : 
+                  Text("Wrong",style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.red),
+                 
+                  ),
                   ),
                 ],
               ),
             );
           }
 
-          else return Center(child: Text("verse not found"),);
+          else return Center(child: CircularProgressIndicator()); 
           }
 
     ),
             
-            
-          ],
-        ),
-      ),
-    );
-  }
-}
+  ],
+  ),),);
+  }}
