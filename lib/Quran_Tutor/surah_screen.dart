@@ -49,10 +49,10 @@ class _surah_screenState extends State<surah_screen> {
         padding: const EdgeInsets.only(left : 30.0),
         child: Row(
           children: [
+            
             IconButton(icon : Const.surahIndex==1? const SizedBox(): Icon(Icons.arrow_left),
             onPressed: () {
-              print('Const.surahIndex');
-
+            
             if (Const.surahIndex! > 1) {
               
             setState(() {

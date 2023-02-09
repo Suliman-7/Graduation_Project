@@ -21,10 +21,19 @@ class _FavoriteVersesState extends State<FavoriteVerses> {
             children: [
               Column(
                 children: [
-                  Center(
-                    child: Text(surah_screen.Fav[index],
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
+                  Row(
+                    children: [
+                      Center(
+                        child: Text(surah_screen.Fav[index],
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
+                      ),
+                      Spacer(),
+                      IconButton(icon: Icon(Icons.remove_circle_rounded, color: Colors.red, size: 20,),
+                      onPressed: () { setState(() {
+                      surah_screen.Fav.removeAt(index);
+                });})
+                    ],
                   ),
                   Divider(thickness: 2,)
                 ],
