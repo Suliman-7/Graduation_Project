@@ -6,8 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:rxdart/rxdart.dart';
-
-import '../Const/Const.dart';
 import 'package:quran_tutor/models/Data.dart';
 
 class AudioReciterScreen extends StatefulWidget {
@@ -92,18 +90,7 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
   Widget build(BuildContext context) {
    // double _width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: (){
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back_ios , color: Colors.black,),
-        ),
-        title: Text('Now Playing',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800),),
-      ),
+      appBar: AppBar(),
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.all(30),
@@ -115,8 +102,8 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                 padding: EdgeInsets.all(20),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 83, 94, 101),
                   borderRadius: BorderRadius.all(Radius.circular(20)),
-                  color: Const.kPrimary,
                   boxShadow: [
                     BoxShadow(
                       blurRadius: 1,
@@ -137,7 +124,7 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      'Total Aya : ${widget.list![currentIndex].numberOfVerses}',
+                      'Total Verses : ${widget.list![currentIndex].numberOfVerses}',
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                   ],
@@ -202,11 +189,9 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                           return Container(
                               //padding: EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                color: Const.kPrimary,
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                             // width: _width * 0.24,
-                             // height: _width * 0.24,
+
                               child: SpinKitRipple(
                                 color: Colors.black,
                                 duration: Duration(milliseconds: 800),
@@ -216,11 +201,9 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                           return InkWell(
                             onTap: _player.play,
                             child: Container(
-                              //width: _width * 0.24,
-                              //height: _width * 0.24,
+
                               padding: EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: Const.kPrimary,
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Icon(
@@ -234,11 +217,9 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                           return InkWell(
                             onTap: _player.pause,
                             child: Container(
-                            //  width: _width * 0.24,
-                            //  height: _width * 0.24,
+
                               padding: EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: Const.kPrimary,
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Icon(
@@ -252,11 +233,9 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                           return InkWell(
                             onTap: () => _player.seek(Duration.zero),
                             child: Container(
-                            //  width: _width * 0.24,
-                            //  height: _width * 0.24,
+
                               padding: EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: Const.kPrimary,
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Icon(
@@ -336,57 +315,7 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                 ),
               ),
               SizedBox(height: 10,),
-              currentIndex >= 113 ? Container() :Expanded(
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 8,
-                        spreadRadius: 0.01,
-                        offset: Offset(0.0,1),
-                      ),
-                    ]
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('UPCOMING SURAH',style: TextStyle(color: Colors.black,
-                            fontSize: 20,fontWeight: FontWeight.bold),),
-                        SizedBox(height: 12,),
-                        Visibility(
-                          visible: (currentIndex<=112) ? true : false,
-                          child: Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                           children: [
-                             Icon(Icons.play_circle_fill,color: Const.kPrimary,),
-                             Text(widget.list![currentIndex+1].name!,style: TextStyle(color: Colors.black,
-                             fontSize: 20),),
-                           ],
-                       ),
-                        ),
-                        SizedBox(height: 12,),
-                        Visibility(
-                          visible: ( currentIndex <=111) ? true : false,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Icon(currentIndex>111 ? null :Icons.play_circle_fill,color: Const.kPrimary,),
-                              Text(currentIndex>111 ? '' : widget.list![currentIndex+2].name!,style: TextStyle(color: Colors.black,
-                                  fontSize: 20),),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              
             ],
           ),
         ),
@@ -407,9 +336,7 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
     // Try to load audio from a source and catch any errors.
     try {
       var url = "https://download.quranicaudio.com/quran/${reciter.path}$ind.mp3";
-      print("AAAAA ${reciter.path}");
-      print("BBBBB ${ind}");
-      print('url $url');
+
      defaultDuration =  (await _player.setAudioSource(AudioSource.uri(Uri.parse(url))))!;
     } catch (e) {
       print("Error loading audio source: $e");
@@ -456,10 +383,8 @@ class _SeekBarState extends State<SeekBar> {
       children: [
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
-            activeTrackColor: Const.kPrimary,
             inactiveTrackColor: Colors.grey,
             trackHeight: 5.0,
-            thumbColor: Const.kPrimary,
             thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10),
             overlayColor: Colors.purple.withAlpha(32),
             overlayShape: RoundSliderOverlayShape(overlayRadius: 14.0),
@@ -540,7 +465,7 @@ void showSliderDialog({
                   height: 100.0,
                   child: Column(
                     children: [
-                      Text('AAA ${snapshot.data?.toStringAsFixed(1)}$valueSuffix',
+                      Text('${snapshot.data?.toStringAsFixed(1)}$valueSuffix',
                           style: TextStyle(
                               fontFamily: 'Fixed',
                               fontWeight: FontWeight.bold,

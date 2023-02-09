@@ -4,7 +4,6 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
-import 'package:quran_tutor/Quran_Tutor/Search_screen.dart';
 import 'package:quran_tutor/models/Data.dart';
 import 'package:http/http.dart' as http ;
 
@@ -83,16 +82,12 @@ class ApiService {
 
           if(list.length<114){
             list.add(SurahData.fromJSON(element));
+          }});
+          return list;
           }
-
-        });
-        // print('ol ${list.length}');
-        return list;
-      }
         else{
           throw("Can't get the Surah");
-        }
-    }
+          }}
     
     Future <verseDay> getVerseDay() async {
       String url = "http://api.alquran.cloud/v1/ayah/${random(1,6237)}/editions/quran-simple,en.pickthall";
@@ -104,8 +99,7 @@ class ApiService {
       else {
         print('failed to load');
         throw Exception("Failed to load Post");
-    }
-    }
+    }}
     random(min,max){
       var rN = new Random();
       return min + rN.nextInt(max-min);

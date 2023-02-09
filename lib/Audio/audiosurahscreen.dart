@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quran_tutor/Const/Const.dart';
 import 'package:quran_tutor/models/Data.dart';
 import 'package:quran_tutor/services/api_services.dart';
-
 import 'AudioReciterScreen.dart';
 import 'audio_screen.dart';
 
@@ -22,9 +20,9 @@ class _AudioSurahScreenState extends State<AudioSurahScreen> {
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 36, 71, 88),
         elevation: 0,
-        title: Text('Surah List' , style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),),
+        title: Text('Surah List' , style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.bold),),
       ),
       body: FutureBuilder(
         future: apiService.getSurah(),
@@ -36,8 +34,9 @@ class _AudioSurahScreenState extends State<AudioSurahScreen> {
               itemCount: surah!.length,
               itemBuilder: ((context, index) => 
               AudioTile(
-                surahName:snapshot.data![index].englishName,
-                totalAyah: snapshot.data![index].numberOfVerses,
+                surEngName : snapshot.data![index].englishName,
+                surahName:snapshot.data![index].name,
+                TotalVerses: snapshot.data![index].numberOfVerses,
                 number: snapshot.data![index].number,
 
                 onTap: () {
@@ -47,12 +46,10 @@ class _AudioSurahScreenState extends State<AudioSurahScreen> {
                     index : index+1, 
                     list : surah,
                     )));
-                }
-                
+                }    
                 )));
           }
           return Center(child: CircularProgressIndicator(),);
-
         }
       ),
     )); 
@@ -60,7 +57,7 @@ class _AudioSurahScreenState extends State<AudioSurahScreen> {
 }
 
 
-Widget AudioTile ({required String? surahName, required totalAyah, required number, required VoidCallback onTap}){
+Widget AudioTile ({required String? surEngName , required String? surahName, required TotalVerses, required number, required VoidCallback onTap}){
 
   return GestureDetector(
     onTap: onTap,
@@ -96,19 +93,17 @@ Widget AudioTile ({required String? surahName, required totalAyah, required numb
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(surahName!,textAlign: TextAlign.end,
+            Text(surEngName!,textAlign: TextAlign.end,
             style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold)
             
             ,),
             SizedBox(height: 3,),
-            Text("totalAyah : $totalAyah" , style: TextStyle(fontSize: 16,color: Colors.black54),)
-          ]
-            ),
-          
-        
-        Spacer(),
-        Icon(Icons.play_circle_fill,color: Const.kPrimary,)
-      ]),
+            Text("Total Verses : $TotalVerses" , style: TextStyle(fontSize: 16,color: Colors.black54),)
+          ]),
+          Spacer(),
+          Text(surahName!,textAlign: TextAlign.end,
+            style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold)),
+            ]),
     ),),
   );
 }

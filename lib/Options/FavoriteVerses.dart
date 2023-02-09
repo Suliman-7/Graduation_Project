@@ -14,14 +14,28 @@ class _FavoriteVersesState extends State<FavoriteVerses> {
   Widget build(BuildContext context) {
     return SafeArea(
       child : Scaffold (
-        appBar: AppBar(),
+        appBar: AppBar(title: Text("Favorite Verses"),),
         body : surah_screen.Fav.length > 0 ? ListView.builder(
           itemCount: surah_screen.Fav.length ,
           itemBuilder: (context,index) { return Column(
             children: [
-              Text(surah_screen.Fav[index]),
+              Column(
+                children: [
+                  Center(
+                    child: Text(surah_screen.Fav[index],
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
+                  ),
+                  Divider(thickness: 2,)
+                ],
+              ),
             ],
-          ); } ) : Text("There is no favorite Verse"),
+          ); } ) : Center(
+          child: Text("There is no favorite Verse",
+                  
+                 textAlign: TextAlign.center,
+                 style : TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        ),
       )
       
     );

@@ -4,6 +4,12 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+class Const {
+static int? surahIndex ;
+static String? SurahName ;
+static List<SurahData>? surahList; 
+}
+
 
 class SearchVerse{
 
@@ -67,30 +73,23 @@ class Surah {
 class surahList {
 
   final List<Surah> surahlist ;
-
   surahList({required this.surahlist});
 
   factory surahList.fromJSON(Map<String,dynamic>map){
     Iterable l = map['data'][0]['ayahs'];
     List<Surah> list = l.map((e) => Surah.fromJSON(e)).toList();
-    
     return surahList(surahlist: list);
-  }
-  
-}
-
-
+  }}
 
 class SurahData {
 
-  int? number /* 0 */ ;
-  String? name /* Alfatiha */ ;
+  int? number;
+  String? name;
   String? englishName;
   int? numberOfVerses;
   String? typeOfRevelation;
 
   SurahData({this.number,this.name, this.englishName,this.numberOfVerses,this.typeOfRevelation});
-
   factory SurahData.fromJSON(Map<String,dynamic> S){
     return SurahData(
       number: S['number'],
@@ -99,12 +98,7 @@ class SurahData {
       numberOfVerses: S['numberOfAyahs'],
       typeOfRevelation: S['revelationType']
                  );
-
-
-  }
-
-
-}
+}}
 
 class verseDay {
   late final String? arText;

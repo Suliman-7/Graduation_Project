@@ -21,34 +21,33 @@ class _ReciterScreenState extends State<ReciterScreen> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.ontap,
-      child: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: Container(
-          padding: EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 3,
-                spreadRadius: 0,
-                color: Colors.black12,
-                offset: Offset(0, 1)
-              )
-            ]
+        onTap: widget.ontap,
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Container(
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 3,
+                  spreadRadius: 0,
+                  color: Colors.black12,
+                  offset: Offset(0, 1)
+                )
+              ]
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(widget.reciter.name!,textAlign: TextAlign.start,
+                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)
+              ],
+            ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(widget.reciter.name!,textAlign: TextAlign.start,
-              style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)
-            ],
-          ),
-        ),
 
-      ),
+        ),
     );
   }
 }

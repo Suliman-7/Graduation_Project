@@ -6,7 +6,6 @@ import 'package:quran_tutor/services/api_services.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:quran_tutor/Quran_Tutor/SpeechText.dart';
-import '../Const/Const.dart';
 import '../models/Data.dart';
 
 class SpeechText extends StatefulWidget {
@@ -19,6 +18,10 @@ class SpeechText extends StatefulWidget {
 class _SpeechTextState extends State<SpeechText> {
   String recognizedText = "";
   bool isEnabled = false;
+  List verseWords = [] ;
+  List reciteWords = [] ;
+  List mistakes = []; 
+  bool mistake = true ; 
   ApiService apiService = ApiService() ;
   @override
   void initState() {
@@ -85,7 +88,11 @@ class _SpeechTextState extends State<SpeechText> {
             VC = VC.replaceAll(" ۚ", "");
             VC = VC.replaceAll("ة","ه");
             VC = VC.replaceAll("۞ ","");
-            print(VC);
+            print(VC); 
+
+
+            
+
 
             return Center(
               child: Column(
@@ -116,11 +123,19 @@ class _SpeechTextState extends State<SpeechText> {
                   Text("") : 
                   recognizedText==VC ?
                   
-                  Text("Correct",style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.green)) : 
+                  Text("Correct",style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.green)) :
+                   
                   Text("Wrong",style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.red),
-                 
-                  ),
-                  ),
+                  ),),
+                  Container(
+                  child: 
+                  mistake == false ? SizedBox() : 
+                  ListView.builder(
+                  itemCount: verseWords.length ,
+                  itemBuilder: (context,index){
+                    return Text(mistakes[index]);
+                  }
+                  ))
                 ],
               ),
             );

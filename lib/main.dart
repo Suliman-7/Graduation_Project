@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:quran_tutor/Quran_Tutor/Home_Screen.dart';
 import 'package:quran_tutor/Quran_Tutor/Surah_screen.dart';
 import 'Audio/audio_screen.dart';
-import 'Const/Const.dart';
 import 'Quran_Tutor/Quran_screen.dart';
-import 'Quran_Tutor/Search_screen.dart';
-import 'Quran_Tutor/Setting_screen.dart' ;
+import 'models/Data.dart';
 
 bool _IconBool = false ; 
 
@@ -58,7 +56,7 @@ class _MyAppState extends State<MyApp> {
               _IconBool = !_IconBool ;
             });
           },
-          icon: Icon(_IconBool ? IconDark : IconLight ),
+          icon: Icon(_IconBool ? IconLight : IconDark ),
           )
         ]),
         body: _listWidget[selectIndex],

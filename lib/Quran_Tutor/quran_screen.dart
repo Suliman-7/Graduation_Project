@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quran_tutor/Const/Const.dart';
 import 'package:quran_tutor/Quran_Tutor/Surah_screen.dart';
 import 'package:quran_tutor/services/api_services.dart';
 
@@ -28,7 +27,6 @@ class _QuranScreenState extends State<QuranScreen> {
         appBar: AppBar(
             title: Text("Quran"),
             centerTitle: true,
-            backgroundColor: Colors.black54,
             bottom: TabBar(
                           indicatorColor: Color.fromARGB(255, 249, 214, 107) ,  
                           tabs: [ 

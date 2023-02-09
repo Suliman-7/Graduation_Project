@@ -48,7 +48,6 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
           appBar: AppBar(
             title: Text("Home Page"),
-            backgroundColor: Colors.black54,
             centerTitle: true,
           ),
           body: Container(
@@ -61,13 +60,12 @@ class _HomePageState extends State<HomePage> {
               width: double.infinity,
               
               child: Row(
-                // mainAxisAlignment: MainAxisAlignment.start,
-                // crossAxisAlignment: CrossAxisAlignment.start,
+
                 children: [
                   Container( alignment: Alignment.topLeft,
                     child: Text(
                       formatted,
-                      style: TextStyle(color: Colors.black, fontSize: 20),
+                      style: TextStyle(fontSize: 20),
                     ),
                   ),
                   Spacer(),
@@ -81,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                           padding: EdgeInsets.symmetric(horizontal: 4),
                           child: Text(
                             _hijri1.hDay.toString(),
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            style: TextStyle(fontSize: 20,),
                           ),
                         ),
                       ),
@@ -90,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 4),
                           child: Text(_hijri1.longMonthName,
-                              style: TextStyle(fontSize: 20, color: Colors.black)),
+                              style: TextStyle(fontSize: 20)),
                         ),
                       ),
                       WidgetSpan(
@@ -99,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                               padding: EdgeInsets.symmetric(horizontal: 4),
                               child: Text(_hijri1.hYear.toString(),
                                   style: TextStyle(
-                                      fontSize: 20, color: Colors.black))))
+                                      fontSize: 20))))
                     ])),
                   )
                 ],
@@ -120,11 +118,10 @@ class _HomePageState extends State<HomePage> {
                   case ConnectionState.done :
                     return Container(
                       margin: EdgeInsets.all(16),
-                      padding: EdgeInsets.all(20),
+                      padding: EdgeInsets.all(15),
                     decoration: BoxDecoration(
-                      
-                      // borderRadius: BorderRadius.circular(32),
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 165, 165, 165),
+                      borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                       BoxShadow(
                        blurRadius:3,
@@ -132,16 +129,19 @@ class _HomePageState extends State<HomePage> {
                        offset : Offset(0,1)
                     )]),
                     child: Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
                       color: Colors.blueGrey,
+                      borderRadius: BorderRadius.circular(10)
+                      ),
                       child: Column(
                         
                         children: [
                         Text("Verse of the day" , 
-                        style: TextStyle(color: Colors.black,
-                        fontWeight: FontWeight.bold , fontSize: 20),), 
-                        Divider(color : Colors.black ,  thickness: 1 ,),
-                        Text(snapshot.data!.arText!, style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                        Text(snapshot.data!.enTran!, style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                        style: TextStyle(fontWeight: FontWeight.bold , fontSize: 20),), 
+                        Divider(thickness: 2,),
+                        Text(snapshot.data!.arText!, style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                        Text(snapshot.data!.enTran!, style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -165,26 +165,34 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: [
                   Column(children: [
-                    Container(child: IconButton(icon: Icon(Icons.bookmark), onPressed: () {
+                    Container(child: IconButton(icon: Icon(Icons.bookmark,size: 35,), onPressed: () {
                     Navigator.push(context,MaterialPageRoute(builder: (context){return bookmark();}));
                       },)),
-                    Container(child: Text("Bookmark" , textAlign: TextAlign.center, 
+                    Container(child: Text("Bookmark \n" , textAlign: TextAlign.center, 
                     style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),)
                   ]),
                   Spacer(),
                   Column(children: [
-                    Container(child: IconButton(icon: Icon(Icons.star), onPressed: () {
+                    Container(child: IconButton(icon: Icon(Icons.list,size: 35,), onPressed: () {
                     Navigator.push(context,MaterialPageRoute(builder: (context){return FavoriteSurahs();}));
                       },)),
-                    Container(child: Text("Favorite Surah" , textAlign: TextAlign.center, 
+                    Container(child: Text("Favorite \n Surahs" , textAlign: TextAlign.center, 
                     style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),)
                   ]),
                   Spacer(),
                   Column(children: [
-                    Container(child: IconButton(icon: Icon(Icons.star), onPressed: () {
+                    Container(child: IconButton(icon: Icon(Icons.star,size: 35,), onPressed: () {
                     Navigator.push(context,MaterialPageRoute(builder: (context){return FavoriteVerses();}));
                       },)),
-                    Container(child: Text("Favorites Verse" , textAlign: TextAlign.center, 
+                    Container(child: Text("Favorite \n Verses" , textAlign: TextAlign.center, 
+                    style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),)
+                  ]),
+                  Spacer(),
+                  Column(children: [
+                    Container(child: IconButton(icon: Icon(Icons.search,size: 35,), onPressed: () {
+                    showSearch(context: context, delegate: DataSearch());
+                      },)),
+                    Container(child: Text("Search \n" , textAlign: TextAlign.center, 
                     style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),)
                   ]),
                 ],
@@ -194,4 +202,76 @@ class _HomePageState extends State<HomePage> {
           )),
     );
   }
+}
+
+class DataSearch extends SearchDelegate {
+  List<SearchVerse> VersesSearch = [] ;
+  ApiService apiService = ApiService();
+  
+  
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(onPressed: () {query = '';}, icon: Icon(Icons.close)),
+    ] ;
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(onPressed: () {close(context, null);}, icon: Icon(Icons.arrow_back));
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return null! ;
+  }
+
+  @override
+  List<SearchVerse> VSList = [] ;
+  Widget buildSuggestions(BuildContext context) {
+    return FutureBuilder(
+              future: apiService.getSearched(), 
+              builder: (BuildContext context,
+                         AsyncSnapshot<List<SearchVerse>> snapshot) {
+                          
+                        if (snapshot.hasData) {
+                          
+                          List<SearchVerse>? SearchV = snapshot.data;
+                          List SV = [] ;
+                          for (int i=0 ; i<SearchV!.length ; i++){
+                           SV.add(SearchV[i].searchverse);
+                          }
+                          
+
+                          List FSV = SV.where((element) => element.toString().contains(query)).toList();
+
+
+
+
+                          return ListView.builder(
+                            itemCount: FSV.length ,
+                            itemBuilder: (context, i) {
+                            
+                            return Column(
+                              children: [
+                                Center(
+                                  child: Text(
+                                      query == "" ? "" : "${FSV[i]}" ,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 25,fontWeight:FontWeight.bold),
+                                    ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  child: Divider(thickness: 3,))
+                              ],
+                            );
+                        });
+                        }
+                        return Center(child: CircularProgressIndicator(),);
+                         }
+              
+              );
+  }
+
 }

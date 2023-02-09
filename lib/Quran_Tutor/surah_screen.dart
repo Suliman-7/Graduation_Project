@@ -1,10 +1,11 @@
 import 'dart:ffi';
 import 'package:flutter/material.dart' ;
 import 'package:flutter_share/flutter_share.dart';
+import 'package:get/get.dart';
 import 'package:quran_tutor/Options/Bookmark.dart';
 import 'package:quran_tutor/Options/FavoriteVerses.dart';
+import 'package:quran_tutor/Quran_Tutor/surrah_controller.dart';
 import 'package:quran_tutor/services/api_services.dart';
-import '../Const/Const.dart';
 import '../Options/Recite.dart';
 import '../models/Data.dart';
 
@@ -31,26 +32,32 @@ class _surah_screenState extends State<surah_screen> {
 
   @override
   Widget build(BuildContext context) {
+
+    SurrahController _surrahController = Get.put(SurrahController());
     return Scaffold(
     
       appBar: AppBar(
-        title: Text( Const.SurahName.toString() ),
+        title: GetBuilder<SurrahController>(builder: (controller) {
+          return Text( SurrahController.surahList?[ Const.surahIndex??0].name??'' );
+        },),
             centerTitle: true,
             backgroundColor: Colors.black54,),
 
       
 
-      // floatingActionButtonLocation : FloatingActionButtonLocation.endFloat,
       floatingActionButton : Padding(
         padding: const EdgeInsets.only(left : 30.0),
         child: Row(
           children: [
             IconButton(icon : Const.surahIndex==1? const SizedBox(): Icon(Icons.arrow_left),
             onPressed: () {
+              print('Const.surahIndex');
+
             if (Const.surahIndex! > 1) {
+              
             setState(() {
             Const.surahIndex = (Const.surahIndex! - 1) ; 
-            Const.SurahName = Const.surahList?[ Const.surahIndex??0].name??'';
+            _surrahController.gotTonextSurrah();
             Navigator.pushReplacementNamed(context, surah_screen.id);
             });}}),
 
@@ -106,7 +113,7 @@ class _surah_screenState extends State<surah_screen> {
             return Text(
               'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20,color: Colors.black54,fontWeight: FontWeight.bold),);
+              style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),);
           }
           else if (index==0 && (Const.surahIndex == 1 || Const.surahIndex == 9) ){
             return Text("");
@@ -122,9 +129,11 @@ class _surah_screenState extends State<surah_screen> {
 
                   child: Container(
                   padding: EdgeInsets.all(8.0),
-                  child: Text("${Arr[index]}",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.black87),)));
+                  child: Center(
+                    child: Text("${Arr[index]}",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                  )));
               }},);
                 }      
             else return Center(child: Text("verse not found"),);

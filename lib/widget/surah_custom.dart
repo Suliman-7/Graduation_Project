@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:quran_tutor/Const/Const.dart';
 
 import 'package:quran_tutor/models/Data.dart';
 
@@ -15,14 +14,11 @@ Widget surahCustomListTile({
 
 {
   return GestureDetector(
-    
+   
     onTap: ontap,
     child: Container(
       padding: EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.transparent, blurRadius: 3.0)]
-      ),
+      
       child: 
       Column(
         children: [
@@ -34,44 +30,43 @@ Widget surahCustomListTile({
                 width: 40,
                 padding: EdgeInsets.all(2),
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.black87,
-                                         ),
+                  shape: BoxShape.circle,),
                 child: Text((Sur.number).toString(),
-                style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
+                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
             ),
             SizedBox(width: 20,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(Sur.englishName!,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 21,color: Colors.black54),),
-                Text("${Sur.typeOfRevelation!} - ${Sur.numberOfVerses} Verses" , style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black54),)
+                Text(Sur.englishName!,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 21),),
+                Text("${Sur.typeOfRevelation!} - ${Sur.numberOfVerses} Verses" , style: TextStyle(fontWeight: FontWeight.bold),)
               ],
             ),
             Spacer(),
             Text(Sur.name!,style: TextStyle(
-              color: Colors.black,fontWeight: FontWeight.bold,fontSize: 24),),
+            fontWeight: FontWeight.bold,fontSize: 24),),
             Spacer(),
             IconButton(
-              color: Colors.black,
               onPressed: () {
+              
               Const.SurahName = Sur.name! ;
               SurahL.FavSur.add(Sur.name!) ; 
               SurahL.FavSurNum.add(Sur.number!) ; 
               }, 
-              icon: Icon(Icons.star))
+              icon: Icon(Icons.star)
 
             
-            
+            )
           ],
         ),
-        Divider(thickness: 3,color: Colors.black,)
+        Divider(thickness: 3)
       ]),
        ),
   );
 }
 
 class SurahL extends StatefulWidget {
+
   const SurahL({super.key});
   static List FavSur = [] ; 
   static List FavSurNum = [] ;
@@ -80,6 +75,7 @@ class SurahL extends StatefulWidget {
 }
 
 class _SurahLState extends State<SurahL> {
+  
   @override
   Widget build(BuildContext context) {
     return Container();
