@@ -9,7 +9,12 @@ import 'package:rxdart/rxdart.dart';
 import 'package:quran_tutor/models/Data.dart';
 
 class AudioReciterScreen extends StatefulWidget {
-  const AudioReciterScreen({Key? key,required this.reciter , required this.index ,required this.list}) : super(key: key);
+  const AudioReciterScreen(
+      {Key? key,
+      required this.reciter,
+      required this.index,
+      required this.list})
+      : super(key: key);
   final Reciter reciter;
   final int index;
   final List<SurahData>? list;
@@ -28,25 +33,22 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
 
   @override
   void initState() {
-
-
     setState(() {
-      currentIndex = widget.index-1;
+      currentIndex = widget.index - 1;
       dataIndex = widget.index - 1;
     });
 
     // Surah is from 1 to 114 so
     // 001 , 002 , 003 ..... 010, 011 , 012 , .....099 , 100 , 101, ...114
-    if(widget.index<10){
-      ind = "00"+(widget.index.toString());
-    }else if(widget.index<100){
-      ind  = "0"+(widget.index.toString());
-    }else if(widget.index>100){
+    if (widget.index < 10) {
+      ind = "00" + (widget.index.toString());
+    } else if (widget.index < 100) {
+      ind = "0" + (widget.index.toString());
+    } else if (widget.index > 100) {
       ind = (widget.index.toString());
     }
 
-
-    _initAudioPlayer(ind!,widget.reciter);
+    _initAudioPlayer(ind!, widget.reciter);
 
     print('index ${widget.index}   current Index ${currentIndex}');
     super.initState();
@@ -57,7 +59,6 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
     _player.dispose();
     super.dispose();
   }
-
 
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
@@ -83,12 +84,12 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
           _player.positionStream,
           _player.bufferedPositionStream,
           _player.durationStream,
-              (position, bufferedPosition, duration) => PositionData(
+          (position, bufferedPosition, duration) => PositionData(
               position, bufferedPosition, duration ?? Duration.zero));
 
   @override
   Widget build(BuildContext context) {
-   // double _width = MediaQuery.of(context).size.width;
+    // double _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -102,16 +103,14 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                 padding: EdgeInsets.all(20),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 83, 94, 101),
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 1,
-                      offset: Offset(0,2),
-                      color: Colors.black12
-                    ),
-                  ]
-                ),
+                    color: Color.fromARGB(255, 83, 94, 101),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    boxShadow: [
+                      BoxShadow(
+                          blurRadius: 1,
+                          offset: Offset(0, 2),
+                          color: Colors.black12),
+                    ]),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -130,7 +129,9 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.05,),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
+              ),
               Container(
                 // margin: EdgeInsets.symmetric(
                 //     vertical: _width * 0.1, horizontal: _width * 0.015),
@@ -142,35 +143,36 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                       duration: positionData?.duration ?? defaultDuration,
                       position: positionData?.position ?? Duration.zero,
                       bufferedPosition:
-                      positionData?.bufferedPosition ?? Duration.zero,
+                          positionData?.bufferedPosition ?? Duration.zero,
                       onChanged: _player.seek,
                     );
                   },
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Container(
-               // margin: EdgeInsets.symmetric(horizontal: _width * 0.05),
+                // margin: EdgeInsets.symmetric(horizontal: _width * 0.05),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
                         onPressed: () {
-                          if(currentIndex > 0){
-                             setState(() {
-                               dataIndex = currentIndex;
-                               currentIndex--;
-                             });
-                             if(dataIndex<10){
-                               ind = "00"+(dataIndex.toString());
-                             }else if(dataIndex<100){
-                               ind  = "0"+(dataIndex.toString());
-                             }else if(dataIndex>100){
-                               ind = (dataIndex.toString());
-                             }
+                          if (currentIndex > 0) {
+                            setState(() {
+                              dataIndex = currentIndex;
+                              currentIndex--;
+                            });
+                            if (dataIndex < 10) {
+                              ind = "00" + (dataIndex.toString());
+                            } else if (dataIndex < 100) {
+                              ind = "0" + (dataIndex.toString());
+                            } else if (dataIndex > 100) {
+                              ind = (dataIndex.toString());
+                            }
 
-                             _initAudioPlayer(ind!, widget.reciter);
-
+                            _initAudioPlayer(ind!, widget.reciter);
                           }
                         },
                         icon: Icon(
@@ -191,17 +193,15 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                               ),
-
                               child: SpinKitRipple(
                                 color: Colors.black,
                                 duration: Duration(milliseconds: 800),
-                              //  size: _width * 0.24,
+                                //  size: _width * 0.24,
                               ));
                         } else if (playing != true) {
                           return InkWell(
                             onTap: _player.play,
                             child: Container(
-
                               padding: EdgeInsets.all(12),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
@@ -213,11 +213,11 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                               ),
                             ),
                           );
-                        } else if (processingState != ProcessingState.completed) {
+                        } else if (processingState !=
+                            ProcessingState.completed) {
                           return InkWell(
                             onTap: _player.pause,
                             child: Container(
-
                               padding: EdgeInsets.all(12),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
@@ -233,7 +233,6 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                           return InkWell(
                             onTap: () => _player.seek(Duration.zero),
                             child: Container(
-
                               padding: EdgeInsets.all(12),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
@@ -250,22 +249,21 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                     ),
                     IconButton(
                       onPressed: () {
-                        if(currentIndex >= 0 && currentIndex<113){
+                        if (currentIndex >= 0 && currentIndex < 113) {
                           //currentIndex = (currentIndex + 1);
                           setState(() {
                             currentIndex++;
                             dataIndex = currentIndex + 1;
                           });
-                          if(dataIndex<10){
-                            ind = "00"+(dataIndex.toString());
-                          }else if(dataIndex<100){
-                            ind  = "0"+(dataIndex.toString());
-                          }else if(dataIndex>100){
+                          if (dataIndex < 10) {
+                            ind = "00" + (dataIndex.toString());
+                          } else if (dataIndex < 100) {
+                            ind = "0" + (dataIndex.toString());
+                          } else if (dataIndex > 100) {
                             ind = (dataIndex.toString());
                           }
 
                           _initAudioPlayer(ind!, widget.reciter);
-
                         }
                       },
                       icon: Icon(
@@ -275,8 +273,9 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.volume_up,
-                      size: MediaQuery.of(context).size.width * 0.1,
+                      icon: Icon(
+                        Icons.volume_up,
+                        size: MediaQuery.of(context).size.width * 0.1,
                       ),
                       onPressed: () {
                         showSliderDialog(
@@ -296,7 +295,8 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                       stream: _player.speedStream,
                       builder: (context, snapshot) => IconButton(
                         icon: Text("${snapshot.data?.toStringAsFixed(1)}x",
-                            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20)),
                         onPressed: () {
                           showSliderDialog(
                             context: context,
@@ -314,8 +314,9 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 10,),
-              
+              SizedBox(
+                height: 10,
+              ),
             ],
           ),
         ),
@@ -323,7 +324,10 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
     );
   }
 
-  void _initAudioPlayer(String ind, Reciter reciter,) async {
+  void _initAudioPlayer(
+    String ind,
+    Reciter reciter,
+  ) async {
     // Inform the operating system of our app's audio attributes etc.
     // We pick a reasonable default for an app that plays speech.
     final session = await AudioSession.instance;
@@ -331,21 +335,22 @@ class _AudioReciterScreenState extends State<AudioReciterScreen> {
     // Listen to errors during playback.
     _player.playbackEventStream.listen((event) {},
         onError: (Object e, StackTrace stackTrace) {
-          print('A stream error occurred: $e');
-        });
+      print('A stream error occurred: $e');
+    });
     // Try to load audio from a source and catch any errors.
     try {
-      var url = "https://download.quranicaudio.com/quran/${reciter.path}$ind.mp3";
+      print(reciter.path);
+      print(ind);
+      var url =
+          "https://download.quranicaudio.com/quran/${reciter.path}$ind.mp3";
 
-     defaultDuration =  (await _player.setAudioSource(AudioSource.uri(Uri.parse(url))))!;
+      defaultDuration =
+          (await _player.setAudioSource(AudioSource.uri(Uri.parse(url))))!;
     } catch (e) {
       print("Error loading audio source: $e");
     }
   }
-
 }
-
-
 
 class PositionData {
   final Duration position;
@@ -354,7 +359,6 @@ class PositionData {
 
   PositionData(this.position, this.bufferedPosition, this.duration);
 }
-
 
 class SeekBar extends StatefulWidget {
   final Duration duration;
@@ -414,14 +418,14 @@ class _SeekBarState extends State<SeekBar> {
                 _positionText,
                 style: TextStyle(
                     color: Colors.black,
-                   // fontFamily: MyFont.alegreyaSansRegular,
+                    // fontFamily: MyFont.alegreyaSansRegular,
                     fontSize: _width * 0.05),
               ),
               Text(
                 _durationText,
                 style: TextStyle(
                     color: Colors.black,
-                  //  fontFamily: MyFont.alegreyaSansRegular,
+                    //  fontFamily: MyFont.alegreyaSansRegular,
                     fontSize: _width * 0.05),
               ),
             ],
@@ -433,14 +437,12 @@ class _SeekBarState extends State<SeekBar> {
 
   String get _durationText =>
       "${widget.duration.inMinutes.remainder(60).toString().padLeft(2, '0')}"
-          ":${widget.duration.inSeconds.remainder(60).toString().padLeft(2, '0')}";
+      ":${widget.duration.inSeconds.remainder(60).toString().padLeft(2, '0')}";
 
   String get _positionText =>
       "${widget.position.inMinutes.remainder(60).toString().padLeft(2, '0')}"
-          ":${widget.position.inSeconds.remainder(60).toString().padLeft(2, '0')}";
+      ":${widget.position.inSeconds.remainder(60).toString().padLeft(2, '0')}";
 }
-
-
 
 void showSliderDialog({
   required BuildContext context,
@@ -449,38 +451,36 @@ void showSliderDialog({
   required double min,
   required double max,
   String valueSuffix = '',
-
   required double value,
   required Stream<double> stream,
-  required ValueChanged<double> onChanged,}) {
+  required ValueChanged<double> onChanged,
+}) {
   showDialog<void>(
     context: context,
-    builder: (context) =>
-        AlertDialog(
-          title: Text(title, textAlign: TextAlign.center),
-          content: StreamBuilder<double>(
-            stream: stream,
-            builder: (context, snapshot) =>
-                Container(
-                  height: 100.0,
-                  child: Column(
-                    children: [
-                      Text('${snapshot.data?.toStringAsFixed(1)}$valueSuffix',
-                          style: TextStyle(
-                              fontFamily: 'Fixed',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24.0)),
-                      Slider(
-                        divisions: divisions,
-                        min: min,
-                        max: max,
-                        value: snapshot.data ?? value,
-                        onChanged: onChanged,
-                      ),
-                    ],
-                  ),
-                ),
+    builder: (context) => AlertDialog(
+      title: Text(title, textAlign: TextAlign.center),
+      content: StreamBuilder<double>(
+        stream: stream,
+        builder: (context, snapshot) => Container(
+          height: 100.0,
+          child: Column(
+            children: [
+              Text('${snapshot.data?.toStringAsFixed(1)}$valueSuffix',
+                  style: TextStyle(
+                      fontFamily: 'Fixed',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24.0)),
+              Slider(
+                divisions: divisions,
+                min: min,
+                max: max,
+                value: snapshot.data ?? value,
+                onChanged: onChanged,
+              ),
+            ],
           ),
         ),
+      ),
+    ),
   );
 }
